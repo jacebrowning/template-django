@@ -1,21 +1,12 @@
-branches:
-  except:
-    - update
-
 language: python
 python:
-  - 2.7
   - 3.6
 
 cache: pip
 
 env:
-  matrix:
-  - TEST_RUNNER=nose
-  - TEST_RUNNER=pytest
   global:
   - RANDOM_SEED=0
-  - PIPENV_NOSPIN=true
 
 before_install:
   - pip install pipenv==7.2.8
@@ -27,8 +18,8 @@ script:
   - make ci
 
 after_script: >
-  echo $TRAVIS_BRANCH; echo $TRAVIS_PULL_REQUEST; echo $TRAVIS_PYTHON_VERSION; echo $TEST_RUNNER;
-  if [[ $TRAVIS_BRANCH == 'master' && $TRAVIS_PULL_REQUEST == 'false' && ( $TRAVIS_PYTHON_VERSION == '2.7' || $TRAVIS_PYTHON_VERSION == '3.6' ) ]]; then
+  echo $TRAVIS_BRANCH; echo $TRAVIS_PULL_REQUEST;
+  if [[ $TRAVIS_BRANCH == 'master' && $TRAVIS_PULL_REQUEST == 'false' ]]; then
 
     # Configure Git with Travis CI information
     git config --global user.email "travis@travis-ci.org" ;
@@ -38,8 +29,7 @@ after_script: >
     rm -rf .git ;
 
     # Clone the destination repository
-    BRANCH=python${TRAVIS_PYTHON_VERSION%.*}-$TEST_RUNNER ;
-    git clone https://${GH_TOKEN}@github.com/jacebrowning/template-python-demo temp --branch $BRANCH ;
+    git clone https://${GH_TOKEN}@github.com/jacebrowning/template-django-demo temp ;
     mv temp/.git TemplateDemo/.git ;
     rm -rf temp ;
 
@@ -48,7 +38,7 @@ after_script: >
     rm -rf .venv ;
     git add --all ;
     git commit -m "Deploy Travis CI build $TRAVIS_BUILD_NUMBER to GitHub" ;
-    git push -f https://${GH_TOKEN}@github.com/jacebrowning/template-python-demo $BRANCH ;
+    git push -f https://${GH_TOKEN}@github.com/jacebrowning/template-django-demo master ;
 
   fi
 

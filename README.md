@@ -1,31 +1,20 @@
-# template-python
+# template-django
 
-Generates the structure for Python libraries using [cookiecutter][cookiecutter].
+Generates the structure for a Django application using [cookiecutter][cookiecutter].
 
-Unix: [![Unix Build Status](https://img.shields.io/travis/jacebrowning/template-python/master.svg)](https://travis-ci.org/jacebrowning/template-python)
-Windows: [![Windows Build Status](https://img.shields.io/appveyor/ci/jacebrowning/template-python.svg)](https://ci.appveyor.com/project/jacebrowning/template-python)
+Unix: [![Unix Build Status](https://img.shields.io/travis/jacebrowning/template-django/master.svg)](https://travis-ci.org/jacebrowning/template-django)
+Windows: [![Windows Build Status](https://img.shields.io/appveyor/ci/jacebrowning/template-django.svg)](https://ci.appveyor.com/project/jacebrowning/template-django)
 
-This is a template for a typical Python library following modern packaging conventions. It utilizes popular libraries alongside Make, Pandoc, and Graphviz to fully automate all development and deployment tasks. Check out the live demo: [jacebrowning/template-python-demo](https://github.com/jacebrowning/template-python-demo)
+This is a template for a typical Django application following modern packaging conventions. It utilizes popular libraries alongside Make and pipenv to fully automate all development and deployment tasks. Check out the live demo: [jacebrowning/template-django-demo](https://github.com/jacebrowning/template-django-demo)
 
-Here are a few sample projects based on this template:
-
-* [jacebrowning/sappy](https://github.com/jacebrowning/sappy)
-* [theovoss/Chess](https://github.com/theovoss/Chess)
-* [sprout42/StarStruct](https://github.com/sprout42/StarStruct)
-* [MichiganLabs/flask-gcm](https://github.com/MichiganLabs/flask-gcm)
-* [flask-restful/flask-restful](https://github.com/flask-restful/flask-restful)
-
-If you are instead looking for a [Python application](https://caremad.io/posts/2013/07/setup-vs-requirement/) template, check out one of the sibling projects:
-
-* [jacebrowning/template-django](https://github.com/jacebrowning/template-django)
-* [jacebrowning/template-flask](https://github.com/jacebrowning/template-flask)
+If you are instead looking for a [Python library](https://caremad.io/posts/2013/07/setup-vs-requirement/) template, check out [jacebrowning/template-python](https://github.com/jacebrowning/template-python).
 
 ## Get Started
 
 Install `cookiecutter` and generate a project:
 
     $ pip install cookiecutter
-    $ cookiecutter gh:jacebrowning/template-python -f
+    $ cookiecutter gh:jacebrowning/template-django -f
 
 Cookiecutter will ask you for some basic info (your name, project name, python package name, etc.) and generate a base Python project for you.
 
@@ -36,25 +25,8 @@ Cookiecutter will ask you for some basic info (your name, project name, python p
     - Installing dependencies into a virtual environment using `pipenv`
     - Running tests
     - Running style checkers (`pycodestyle`/`pydocstyle`) and linters (`pylint`)
-    - Building documentation
-    - Creating and releasing distributions to PyPI
 
 [cookiecutter]: https://github.com/audreyr/cookiecutter
 [travis]: https://travis-ci.org/
 [coveralls]: https://coveralls.io/
 [scrutinizer]: https://scrutinizer-ci.com/
-
-## Apply Updates
-
-### Regeneration
-
-To apply updates to an existing project, use the `update` branch and provide the same project details:
-
-    $ cd <parent directory of existing project>
-    $ cookiecutter gh:jacebrowning/template-python --checkout update
-
-Then, discard all undesired changes before committing.
-
-### Manual Diff
-
-Checkout the appropriate branch of [template-python-demo](https://github.com/jacebrowning/template-python-demo) and manually merge changes into your project.
