@@ -1,6 +1,6 @@
 machine:
   python:
-    version: 3.6.1
+    version: {{cookiecutter.python_major_version}}.{{cookiecutter.python_minor_version}}
   environment:
     RANDOM_SEED: 0
     PIPENV_NOSPIN: true
@@ -8,14 +8,20 @@ machine:
 dependencies:
   pre:
     - pip install pipenv==7.2.8
+    - sudo apt-get update && sudo apt-get install libpango1.0-0 && sudo apt-get install firefox && sudo ln -sf /usr/lib/firefox/firefox /usr/bin/firefox
+    - wget https://github.com/mozilla/geckodriver/releases/download/v0.17.0/geckodriver-v0.17.0-linux64.tar.gz && tar -xvzf geckodriver-v0.17.0-linux64.tar.gz && chmod +x geckodriver && sudo cp geckodriver /usr/local/bin/
     - make doctor
   override:
     - make install
   cache_directories:
+    - ~/.cache/pip
     - .venv
 
 test:
+  pre:
+    - make reset
   override:
     - make check
-    - make test-unit REPORTS=${CIRCLE_TEST_REPORTS}
-    - make test-int REPORTS=${CIRCLE_TEST_REPORTS}
+    - make test-unit
+    - make test-integration
+    - make test-system

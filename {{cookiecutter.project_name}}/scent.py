@@ -1,99 +1,69 @@
-{%- if cookiecutter.python_major_version == "2" -%}# -*- coding: utf-8 -*-
-{% endif -%}
 """Configuration file for sniffer."""
-# pylint: disable=superfluous-parens,bad-continuation
 
-import time
+import os
 import subprocess
 
 from sniffer.api import select_runnable, file_validator, runnable
-try:
-    from pync import Notifier
-except ImportError:
-    notify = None
-else:
-    notify = Notifier.notify
 
 
-watch_paths = ["{{cookiecutter.package_name}}", "tests"]
+watch_paths = [
+    "config",
+    "{{cookiecutter.project_name}}",
+    "tests",
+]
 
 
-class Options(object):
-    group = int(time.time())  # unique per run
-    show_coverage = False
-    rerun_args = None
-
-    targets = [
-        (('make', 'test-unit', 'DISABLE_COVERAGE=true'), "Unit Tests", True),
-        (('make', 'test-all'), "Integration Tests", False),
-        (('make', 'check'), "Static Analysis", True),
-        (('make', 'doc'), None, True),
-    ]
-
-
-@select_runnable('run_targets')
+@select_runnable('application_targets')
 @file_validator
-def python_files(filename):
-    return filename.endswith('.py')
+def application_code(path):
+    return matches(path, 'py', 'ini', 'cfg') and 'tests' not in path
 
 
-@select_runnable('run_targets')
+@select_runnable('unit_targets')
 @file_validator
-def html_files(filename):
-    return filename.split('.')[-1] in ['html', 'css', 'js']
+def unit_tests(path):
+    return matches(path, 'py', 'ini', 'cfg') and 'unit' in path
+
+
+@select_runnable('integration_targets')
+@file_validator
+def integration_tests(path):
+    return matches(path, 'py', 'ini', 'cfg') and 'integration' in path
+
+
+@select_runnable('system_targets')
+@file_validator
+def system_tests(path):
+    return matches(path, 'py', 'ini', 'cfg') and 'system' in path
 
 
 @runnable
-def run_targets(*args):
-    """Run targets for Python."""
-    Options.show_coverage = 'coverage' in args
-
-    count = 0
-    for count, (command, title, retry) in enumerate(Options.targets, start=1):
-
-        success = call(command, title, retry)
-        if not success:
-            message = "✅ " * (count - 1) + "❌"
-            show_notification(message, title)
-
-            return False
-
-    message = "✅ " * count
-    title = "All Targets"
-    show_notification(message, title)
-    show_coverage()
-
-    return True
+def application_targets(*_):
+    return call("make test-unit test-integration check")
 
 
-def call(command, title, retry):
-    """Run a command-line program and display the result."""
-    if Options.rerun_args:
-        command, title, retry = Options.rerun_args
-        Options.rerun_args = None
-        success = call(command, title, retry)
-        if not success:
-            return False
-
-    print("")
-    print("$ %s" % ' '.join(command))
-    failure = subprocess.call(command)
-
-    if failure and retry:
-        Options.rerun_args = command, title, retry
-
-    return not failure
+@runnable
+def unit_targets(*_):
+    return call("make test-unit check")
 
 
-def show_notification(message, title):
-    """Show a user notification."""
-    if notify and title:
-        notify(message, title=title, group=Options.group)
+@runnable
+def integration_targets(*_):
+    return call("make test-integration check")
 
 
-def show_coverage():
-    """Launch the coverage report."""
-    if Options.show_coverage:
-        subprocess.call(['make', 'read-coverage'])
+@runnable
+def system_targets(*_):
+    return call("make test-system check")
 
-    Options.show_coverage = False
+
+def matches(path, *extensions):
+    extension = path.split('.')[-1]
+    return extension in extensions
+
+
+def call(command):
+    print('\n' + f"$ {command}")
+    os.environ['DISABLE_COVERAGE'] = 'true'
+    success = subprocess.call(command, shell=True) == 0
+    return success

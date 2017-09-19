@@ -30,11 +30,11 @@ after_script: >
 
     # Clone the destination repository
     git clone https://${GH_TOKEN}@github.com/jacebrowning/template-django-demo temp ;
-    mv temp/.git TemplateDemo/.git ;
+    mv temp/.git demo_project/.git ;
     rm -rf temp ;
 
     # Rebuild the repository from the generated files and push to GitHub
-    cd TemplateDemo ;
+    cd demo_project ;
     rm -rf .venv ;
     git add --all ;
     git commit -m "Deploy Travis CI build $TRAVIS_BUILD_NUMBER to GitHub" ;

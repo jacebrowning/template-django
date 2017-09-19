@@ -20,7 +20,7 @@ watch_paths = ['.']
 @select_runnable('python')
 @file_validator
 def py_files(filename):
-    return "TemplateDemo" not in filename
+    return "demo_project" not in filename
 
 
 @runnable

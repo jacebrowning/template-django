@@ -1,277 +1,153 @@
-# Project settings
-PROJECT := {{cookiecutter.project_name}}
-PACKAGE := {{cookiecutter.package_name}}
-REPOSITORY := {{cookiecutter.github_username}}/{{cookiecutter.github_repo}}
-
-# Project paths
-PACKAGES := $(PACKAGE) tests
-CONFIG := $(wildcard *.py)
-MODULES := $(wildcard $(PACKAGE)/*.py)
-
-# Virtual environment paths
-export PIPENV_SHELL_COMPAT=true
-export PIPENV_VENV_IN_PROJECT=true
-export PIPENV_IGNORE_VIRTUALENVS=true
+ifdef CIRCLECI
+ENV := /home/ubuntu/virtualenvs/venv-3.6.1
+else ifdef HEROKU_APP_NAME
+ENV := .
+else
 ENV := .venv
-
-# MAIN TASKS ###################################################################
-
-SNIFFER := pipenv run sniffer
+RUN := pipenv run
+endif
 
 .PHONY: all
-all: install
+all: install build
 
 .PHONY: ci
-ci: check test ## Run all tasks that determine CI status
+ci: check test ## CI | Run all validation targets
 
 .PHONY: watch
-watch: install .clean-test ## Continuously run all CI tasks when files chanage
-	$(SNIFFER)
+watch: install ## CI | Rerun all validation targests in a loop
+	@ rm -rf $(FAILURES)
+	- HOMEBREW_NO_AUTO_UPDATE=true brew install terminal-notifier
+	- $(PIP) install MacFSEvents pync
+	$(RUN) sniffer
 
-.PHONY: run ## Start the program
-run: install
-	pipenv run python $(PACKAGE)/__main__.py
-
-# SYSTEM DEPENDENCIES ##########################################################
+# SYSTEM DEPENDENCIES #########################################################
 
 .PHONY: doctor
-doctor:  ## Confirm system dependencies are available
+doctor: ## Check for required system dependencies
 	bin/verchew
 
-# PROJECT DEPENDENCIES #########################################################
+.envrc:
+	echo export PYTHONUNBUFFERED=true >> $@
+	echo export PIPENV_SHELL_COMPAT=true >> $@
+	echo export PIPENV_VENV_IN_PROJECT=true >> $@
+	echo >> $@
+	echo export SECRET_KEY=local >> $@
+	echo export DATABASE_URL=postgresql://localhost/{{cookiecutter.project_name}}_dev >> $@
 
+# PROJECT DEPENDENCIES ########################################################
+
+PIP := $(ENV)/bin/pip
 DEPENDENCIES := $(ENV)/.installed
-METADATA := *.egg-info
 
 .PHONY: install
-install: $(DEPENDENCIES) $(METADATA)
+install: $(DEPENDENCIES) ## Install project dependencies
 
-$(DEPENDENCIES): Pipfile*
+$(DEPENDENCIES): $(PIP) Pipfile*
 	pipenv install --dev
 	@ touch $@
 
-$(METADATA): setup.py
-	pipenv run python setup.py develop
-	@ touch $@
+$(PIP):
+	pipenv --python=python3.6
 
-# CHECKS #######################################################################
+# BUILD TARGETS ###############################################################
 
-PYLINT := pipenv run pylint
-PYCODESTYLE := pipenv run pycodestyle
-PYDOCSTYLE := pipenv run pydocstyle
+.PHONY: build
+build:
+	@ echo "TODO: compile frontend code"
+
+.PHONY: clean
+clean:
+	rm -rf staticfiles
+	rm -rf .coverage htmlcov
+	rm -rf $(ENV)
+
+# RUNTIME DEPENDENCIES ########################################################
+
+.PHONY: migrations
+migrations: install  ## Database | Generate database migrations
+	$(RUN) python manage.py makemigrations
+
+.PHONY: migrate
+migrate: install ## Database | Run database migrations
+	$(RUN) python manage.py migrate
+
+.PHONY: data
+ifdef HEROKU_APP_NAME
+data: ## Database | Seed data for manual testing
+else
+data: install migrate
+endif
+	$(RUN) python manage.py loaddata users
+	$(RUN) python manage.py loaddata content
+	$(RUN) python manage.py cleandata
+
+.PHONY: reset
+reset: install ## Database | Create a new database, migrate, and seed it
+	- dropdb {{cookiecutter.project_name}}_dev
+	- createdb {{cookiecutter.project_name}}_dev
+	make data
+
+# VALIDATION TARGETS ##########################################################
+
+PYTHON_PACKAGES := config {{cookiecutter.project_name}} tests
+
+FAILURES := .cache/v/cache/lastfailed
 
 .PHONY: check
-check: pylint pycodestyle pydocstyle ## Run linters and static analysis
-
-.PHONY: pylint
-pylint: install
-	$(PYLINT) $(PACKAGES) $(CONFIG) --rcfile=.pylint.ini
-
-.PHONY: pycodestyle
-pycodestyle: install
-	$(PYCODESTYLE) $(PACKAGES) $(CONFIG) --config=.pycodestyle.ini
-
-.PHONY: pydocstyle
-pydocstyle: install
-	$(PYDOCSTYLE) $(PACKAGES) $(CONFIG)
-
-# TESTS ########################################################################
-
-{% if cookiecutter.test_runner == "nose" -%}
-NOSE := pipenv run nosetests
-{%- elif cookiecutter.test_runner == "pytest" -%}
-PYTEST := pipenv run py.test
-{%- endif %}
-COVERAGE := pipenv run coverage
-COVERAGE_SPACE := pipenv run coverage.space
-
-RANDOM_SEED ?= $(shell date +%s)
-{% if cookiecutter.test_runner == "nose" %}
-NOSE_OPTIONS := --with-doctest
-ifndef DISABLE_COVERAGE
-NOSE_OPTIONS += --with-coverage --cover-package=$(PACKAGE) --cover-html --cover-html-dir=htmlcov --cover-branches
-endif
+check: install ## Run static analysis
+	$(RUN) pylint $(PYTHON_PACKAGES) --rcfile=.pylint.ini
+	$(RUN) pycodestyle $(PYTHON_PACKAGES) --config=.pycodestyle.ini
 
 .PHONY: test
-test: test-all ## Run unit and integration tests
-
-.PHONY: test-unit
-test-unit: install .clean-test
-	$(NOSE) $(PACKAGE) $(NOSE_OPTIONS)
-	$(COVERAGE_SPACE) $(REPOSITORY) unit
-
-.PHONY: test-int
-test-int: install .clean-test
-	$(NOSE) tests $(NOSE_OPTIONS)
-	$(COVERAGE_SPACE) $(REPOSITORY) integration
-
-.PHONY: test-all
-test-all: install .clean-test
-	$(NOSE) $(PACKAGES) $(NOSE_OPTIONS)
-	$(COVERAGE_SPACE) $(REPOSITORY) overall
-{% elif cookiecutter.test_runner == "pytest" -%}
-FAILURES := .cache/v/cache/lastfailed
-REPORTS ?= xmlreport
-
-PYTEST_CORE_OPTIONS := -ra -vv
-PYTEST_COV_OPTIONS := --cov=$(PACKAGE) --no-cov-on-fail --cov-report=term-missing:skip-covered --cov-report=html
-PYTEST_RANDOM_OPTIONS := --random --random-seed=$(RANDOM_SEED)
-
-PYTEST_OPTIONS := $(PYTEST_CORE_OPTIONS) $(PYTEST_RANDOM_OPTIONS)
-ifndef DISABLE_COVERAGE
-PYTEST_OPTIONS += $(PYTEST_COV_OPTIONS)
-endif
-PYTEST_RERUN_OPTIONS := $(PYTEST_CORE_OPTIONS) --last-failed --exitfirst
-
-.PHONY: test
-test: test-all ## Run unit and integration tests
+test: install ## Run all tests
+	@ if test -e $(FAILURES); then $(RUN) py.test tests/unit tests/integration; fi
+	@ rm -rf $(FAILURES)
+	$(RUN) py.test tests/unit tests/integration
+	$(RUN) coverage.space jacebrowning/{{cookiecutter.project_name}} overall
 
 .PHONY: test-unit
 test-unit: install
-	@- mv $(FAILURES) $(FAILURES).bak
-	$(PYTEST) $(PYTEST_OPTIONS) $(PACKAGE) --junitxml=$(REPORTS)/unit.xml
-	@- mv $(FAILURES).bak $(FAILURES)
-	$(COVERAGE_SPACE) $(REPOSITORY) unit
-
-.PHONY: test-int
-test-int: install
-	@ if test -e $(FAILURES); then $(PYTEST) $(PYTEST_RERUN_OPTIONS) tests; fi
+	@ if test -e $(FAILURES); then $(RUN) py.test tests/unit; fi
 	@ rm -rf $(FAILURES)
-	$(PYTEST) $(PYTEST_OPTIONS) tests --junitxml=$(REPORTS)/integration.xml
-	$(COVERAGE_SPACE) $(REPOSITORY) integration
+	$(RUN) py.test tests/unit
+	$(RUN) coverage.space jacebrowning/{{cookiecutter.project_name}} unit
 
-.PHONY: test-all
-test-all: install
-	@ if test -e $(FAILURES); then $(PYTEST) $(PYTEST_RERUN_OPTIONS) $(PACKAGES); fi
+.PHONY: test-integration
+test-integration: install
+	@ if test -e $(FAILURES); then $(RUN) py.test tests/integration; fi
 	@ rm -rf $(FAILURES)
-	$(PYTEST) $(PYTEST_OPTIONS) $(PACKAGES) --junitxml=$(REPORTS)/overall.xml
-	$(COVERAGE_SPACE) $(REPOSITORY) overall
-{% endif %}
-.PHONY: read-coverage
-read-coverage:
-	bin/open htmlcov/index.html
+	$(RUN) py.test tests/integration
+	$(RUN) coverage.space jacebrowning/{{cookiecutter.project_name}} integration
 
-# DOCUMENTATION ################################################################
+.PHONY: test-system
+test-system: install
+	$(RUN) honcho start --procfile=tests/system/Procfile --env=tests/system/.env
+	@ rm -rf $(FAILURES)
 
-PYREVERSE := pipenv run pyreverse
-MKDOCS := pipenv run mkdocs
+# SERVER TARGETS ##############################################################
 
-MKDOCS_INDEX := site/index.html
+.PHONY: run
+run: .envrc install build ## Run the applicaiton
+	$(RUN) python manage.py runserver $${PORT:-5000}
 
-.PHONY: doc
-doc: uml mkdocs ## Generate documentation
+.PHONY: run-prod
+run-prod: .envrc install ## Run the application (simulate production)
+	pipenv shell -c "bin/pre_compile; exit \$$?"
+	pipenv shell -c "bin/post_compile; exit \$$?"
+	pipenv shell -c "heroku local release; exit \$$?"
+	pipenv shell -c "heroku local web; exit \$$?"
 
-.PHONY: uml
-uml: install docs/*.png
-docs/*.png: $(MODULES)
-	$(PYREVERSE) $(PACKAGE) -p $(PACKAGE) -a 1 -f ALL -o png --ignore tests
-	- mv -f classes_$(PACKAGE).png docs/classes.png
-	- mv -f packages_$(PACKAGE).png docs/packages.png
+# RELEASE TARGETS #############################################################
 
-.PHONY: mkdocs
-mkdocs: install $(MKDOCS_INDEX)
-$(MKDOCS_INDEX): mkdocs.yml docs/*.md
-	ln -sf `realpath README.md --relative-to=docs` docs/index.md
-	ln -sf `realpath CHANGELOG.md --relative-to=docs/about` docs/about/changelog.md
-	ln -sf `realpath CONTRIBUTING.md --relative-to=docs/about` docs/about/contributing.md
-	ln -sf `realpath LICENSE.md --relative-to=docs/about` docs/about/license.md
-	$(MKDOCS) build --clean --strict
+.PHONY: promote
+promote: install
+	SITE=https://staging.{{cookiecutter.project_name}}.com $(RUN) pytest tests/system
+	heroku pipelines:promote --app {{cookiecutter.project_name}}-staging --to {{cookiecutter.project_name}}
+	# TODO: Update system tests so they can run against production
+	# Should have a specific test user name?
+	SITE=https://{{cookiecutter.project_name}}.com $(RUN) pytest tests/system
 
-.PHONY: mkdocs-live
-mkdocs-live: mkdocs
-	eval "sleep 3; bin/open http://127.0.0.1:8000" &
-	$(MKDOCS) serve
-
-# BUILD ########################################################################
-
-PYINSTALLER := pipenv run pyinstaller
-PYINSTALLER_MAKESPEC := pipenv run pyi-makespec
-
-DIST_FILES := dist/*.tar.gz dist/*.whl
-EXE_FILES := dist/$(PROJECT).*
-
-.PHONY: dist
-dist: install $(DIST_FILES)
-$(DIST_FILES): $(MODULES) README.rst CHANGELOG.rst
-	rm -f $(DIST_FILES)
-	pipenv run python setup.py check --restructuredtext --strict --metadata
-	pipenv run python setup.py sdist
-	pipenv run python setup.py bdist_wheel
-
-%.rst: %.md
-	pandoc -f markdown_github -t rst -o $@ $<
-
-.PHONY: exe
-exe: install $(EXE_FILES)
-$(EXE_FILES): $(MODULES) $(PROJECT).spec
-	# For framework/shared support: https://github.com/yyuu/pyenv/wiki
-	$(PYINSTALLER) $(PROJECT).spec --noconfirm --clean
-
-$(PROJECT).spec:
-	$(PYINSTALLER_MAKESPEC) $(PACKAGE)/__main__.py --onefile --windowed --name=$(PROJECT)
-
-# RELEASE ######################################################################
-
-TWINE := pipenv run twine
-
-.PHONY: register
-register: dist ## Register the project on PyPI
-	@ echo NOTE: your project must be registered manually
-	@ echo https://github.com/pypa/python-packaging-user-guide/issues/263
-	# TODO: switch to twine when the above issue is resolved
-	# $(TWINE) register dist/*.whl
-
-.PHONY: upload
-upload: .git-no-changes register ## Upload the current version to PyPI
-	$(TWINE) upload dist/*.*
-	bin/open https://pypi.python.org/pypi/$(PROJECT)
-
-.PHONY: .git-no-changes
-.git-no-changes:
-	@ if git diff --name-only --exit-code;        \
-	then                                          \
-		echo Git working copy is clean...;        \
-	else                                          \
-		echo ERROR: Git working copy is dirty!;   \
-		echo Commit your changes and try again.;  \
-		exit -1;                                  \
-	fi;
-
-# CLEANUP ######################################################################
-
-.PHONY: clean
-clean: .clean-dist .clean-test .clean-doc .clean-build ## Delete all generated and temporary files
-
-.PHONY: clean-all
-clean-all: clean .clean-env .clean-workspace
-
-.PHONY: .clean-build
-.clean-build:
-	find $(PACKAGES) -name '*.pyc' -delete
-	find $(PACKAGES) -name '__pycache__' -delete
-	rm -rf *.egg-info
-
-.PHONY: .clean-doc
-.clean-doc:
-	rm -rf README.rst docs/apidocs *.html docs/*.png site
-
-.PHONY: .clean-test
-.clean-test:
-	rm -rf .cache .pytest .coverage htmlcov xmlreport
-
-.PHONY: .clean-dist
-.clean-dist:
-	rm -rf *.spec dist build
-
-.PHONY: .clean-env
-.clean-env: clean
-	rm -rf $(ENV)
-
-.PHONY: .clean-workspace
-.clean-workspace:
-	rm -rf *.sublime-workspace
-
-# HELP #########################################################################
+# HELP ########################################################################
 
 .PHONY: help
 help: all

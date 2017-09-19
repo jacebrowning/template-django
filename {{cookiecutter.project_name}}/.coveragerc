@@ -1,5 +1,11 @@
 [run]
+
 branch = true
+
 omit =
-    */.venv/*
+    .venv/*
+    */migrations/*
+    */management/*
     */tests/*
+    */admin.py
+    */wsgi.py

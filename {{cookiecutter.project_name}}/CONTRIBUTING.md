@@ -9,8 +9,6 @@
     * Mac: http://developer.apple.com/xcode
     * Linux: http://www.gnu.org/software/make
 * pipenv: http://docs.pipenv.org
-* Pandoc: http://johnmacfarlane.net/pandoc/installing.html
-* Graphviz: http://www.graphviz.org/Download.php
 
 To confirm these system dependencies are configured correctly:
 
@@ -44,13 +42,6 @@ $ make watch
 
 > In order to have OS X notifications, `brew install terminal-notifier`.
 
-### Documentation
-
-Build the documentation:
-
-```sh
-$ make doc
-```
 
 ### Static Analysis
 
@@ -69,12 +60,4 @@ The CI server will report overall build status:
 
 ```sh
 $ make ci
-```
-
-## Release Tasks
-
-Release to PyPI:
-
-```sh
-$ make upload
 ```
