@@ -100,24 +100,24 @@ check: install ## Run static analysis
 
 .PHONY: test
 test: install ## Run all tests
-	@ if test -e $(FAILURES); then $(RUN) py.test tests/unit tests/integration; fi
+	@ if test -e $(FAILURES); then $(RUN) py.test {{cookiecutter.project_name}} tests/integration; fi
 	@ rm -rf $(FAILURES)
-	$(RUN) py.test tests/unit tests/integration
-	$(RUN) coverage.space jacebrowning/{{cookiecutter.project_name}} overall
+	$(RUN) py.test {{cookiecutter.project_name}} tests/integration
+	$(RUN) coverage.space {{cookiecutter.github_username}}/{{cookiecutter.github_repo}} overall
 
 .PHONY: test-unit
 test-unit: install
-	@ if test -e $(FAILURES); then $(RUN) py.test tests/unit; fi
+	@ if test -e $(FAILURES); then $(RUN) py.test {{cookiecutter.project_name}}; fi
 	@ rm -rf $(FAILURES)
-	$(RUN) py.test tests/unit
-	$(RUN) coverage.space jacebrowning/{{cookiecutter.project_name}} unit
+	$(RUN) py.test {{cookiecutter.project_name}}
+	$(RUN) coverage.space {{cookiecutter.github_username}}/{{cookiecutter.github_repo}} unit
 
 .PHONY: test-integration
 test-integration: install
 	@ if test -e $(FAILURES); then $(RUN) py.test tests/integration; fi
 	@ rm -rf $(FAILURES)
 	$(RUN) py.test tests/integration
-	$(RUN) coverage.space jacebrowning/{{cookiecutter.project_name}} integration
+	$(RUN) coverage.space {{cookiecutter.github_username}}/{{cookiecutter.github_repo}} integration
 
 .PHONY: test-system
 test-system: install
