@@ -1,0 +1,31 @@
+{
+  "scripts": {
+    "postdeploy": "make data"
+  },
+  "env": {
+    "PIPENV_COLORBLIND" : {
+      "value": "true"
+    },
+    "PIPENV_NOSPIN" : {
+      "value": "true"
+    },
+    "HEROKU_APP_NAME": {
+      "required": true
+    },
+
+    "DJANGO_SETTINGS_MODULE": {
+      "required": true
+    },
+    "SECRET_KEY": {
+      "generator": "secret"
+    }
+  },
+  "buildpacks": [
+    {
+      "url": "heroku/python"
+    }
+  ],
+  "addons": [
+    "heroku-postgresql"
+  ]
+}
