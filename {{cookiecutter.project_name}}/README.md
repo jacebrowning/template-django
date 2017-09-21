@@ -1,4 +1,4 @@
-[![CircleCI](https://circleci.com/gh/{{cookiecutter.github_username}}/{{cookiecutter.github_repo}.svg?style=svg)](https://circleci.com/gh/{{cookiecutter.github_username}}/{{cookiecutter.github_repo})
+[![CircleCI](https://circleci.com/gh/{{cookiecutter.github_username}}/{{cookiecutter.github_repo}}.svg?style=svg)](https://circleci.com/gh/{{cookiecutter.github_username}}/{{cookiecutter.github_repo}})
 
 # Overview
 
