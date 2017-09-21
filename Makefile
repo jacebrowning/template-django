@@ -10,7 +10,10 @@ all: install
 
 .PHONY: ci
 ci: build
-	make doctor ci -C $(GENERATED_PROJECT)
+	make doctor -C $(GENERATED_PROJECT)
+	make install -C $(GENERATED_PROJECT)
+	cd $(GENERATED_PROJECT) && pipenv lock
+	make ci -C $(GENERATED_PROJECT)
 
 .PHONY: watch
 watch: install clean
