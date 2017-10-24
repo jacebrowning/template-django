@@ -7,7 +7,7 @@ machine:
 
 dependencies:
   pre:
-    - pip install pipenv==7.2.8
+    - pip install pipenv==8.2.7
     - sudo apt-get update && sudo apt-get install libpango1.0-0 && sudo apt-get install firefox && sudo ln -sf /usr/lib/firefox/firefox /usr/bin/firefox
     - wget https://github.com/mozilla/geckodriver/releases/download/v0.17.0/geckodriver-v0.17.0-linux64.tar.gz && tar -xvzf geckodriver-v0.17.0-linux64.tar.gz && chmod +x geckodriver && sudo cp geckodriver /usr/local/bin/
     - make doctor
