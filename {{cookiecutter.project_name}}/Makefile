@@ -1,11 +1,8 @@
 ifdef CIRCLECI
-	ENV := .venv
 	RUN := pipenv run
 else ifdef HEROKU_APP_NAME
-	ENV := .
 	SKIP_INSTALL := true
 else
-	ENV := .venv
 	RUN := pipenv run
 endif
 
@@ -37,7 +34,7 @@ doctor: ## Check for required system dependencies
 
 # PROJECT DEPENDENCIES ########################################################
 
-BACKEND_DEPENDENCIES := $(ENV)/.checksum-$(shell bin/checksum Pipfile.lock)
+BACKEND_DEPENDENCIES := tmp/.pipenv-$(shell bin/checksum Pipfile.lock)
 FRONTEND_DEPENDENCIES :=
 
 .PHONY: install
@@ -46,6 +43,7 @@ install: $(BACKEND_DEPENDENCIES) $(FRONTEND_DEPENDENCIES) ## Install project dep
 endif
 
 $(BACKEND_DEPENDENCIES):
+	mkdir -p tmp
 	pipenv install --dev
 	@ touch $@
 
@@ -57,7 +55,7 @@ $(FRONTEND_DEPENDENCIES):
 clean:
 	rm -rf staticfiles
 	rm -rf .coverage htmlcov
-	rm -rf $(ENV)
+	pipenv --rm
 
 # RUNTIME DEPENDENCIES ########################################################
 
