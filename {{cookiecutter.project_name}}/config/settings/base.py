@@ -57,19 +57,26 @@ LOGGING = {
     'disable_existing_loggers': False,
     'formatters': {
         'simple': {
-            'format': '%(asctime)s [%(process)d] [%(levelname)s] %(message)s'
+            'format': '%(levelname)s: %(message)s'
         },
-    },
-    'root': {
-        'level': 'ERROR',
-        'handlers': ['bugsnag'],
     },
     'handlers': {
-        'bugsnag': {
-            'level': 'ERROR',
-            'class': 'bugsnag.handlers.BugsnagHandler',
+        'console': {
+            'level': 'INFO',
+            'class': 'logging.StreamHandler',
+            'formatter': 'simple',
         },
     },
+    'loggers': {
+        'django': {
+            'handlers':['console'],
+            'level':'DEBUG',
+        },
+        '{{cookiecutter.first_app_name}}': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+        },
+    }
 }
 
 ###############################################################################
