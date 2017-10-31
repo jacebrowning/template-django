@@ -2,17 +2,20 @@ export PIPENV_VENV_IN_PROJECT=true
 
 ENV := .venv
 
+DEMO := demo_project
+
 # MAIN ########################################################################
 
 .PHONY: all
 all: install
 
 .PHONY: ci
-ci: build demo_project/Pipfile.lock
-	make ci -C demo_project
+ci: build $(DEMO)/Pipfile.lock
+	make ci -C $(DEMO)
 
 .PHONY: watch
 watch: install
+	rm -rf $(DEMO)
 	pipenv run watchmedo shell-command --command="clear; make ci" --recursive {{cookiecutter.project_name}}
 
 # DEPENDENCIES ################################################################
@@ -29,12 +32,12 @@ $(ENV): Pipfile*
 build: install
 	pipenv run cookiecutter . --no-input --overwrite-if-exists
 
-demo_project/Pipfile.lock:
-	cd demo_project && pipenv lock
+$(DEMO)/Pipfile.lock:
+	cd $(DEMO) && pipenv lock
 
 # CLEANUP #####################################################################
 
 .PHONY: clean
 clean:
-	rm -rf demo_project
+	rm -rf $(DEMO)
 	rm -rf $(ENV)
