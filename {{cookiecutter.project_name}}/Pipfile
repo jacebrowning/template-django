@@ -43,3 +43,4 @@ coverage = "~=4.0"
 
 # Tooling
 sniffer = "*"
+honcho = "*"
