@@ -16,15 +16,8 @@ django-cors-headers = "~=1.2.0"
 dj-database-url = "==0.4.2"
 psycopg2 = "~=2.6"
 
-PyYAML = "~=3.12"
-langdetect = "~=1.0.7"
-profanityfilter = "*"
-requests = "*"
-orderedset = "*"
-
 whitenoise = "~=3.3"
 gunicorn = "~=19.7"
-bugsnag = "*"
 
 [dev-packages]
 
@@ -40,22 +33,12 @@ pytest-expecter = "==0.2.2.post6"
 pytest-cov = "*"
 pytest-random = "*"
 pytest-catchlog = "*"
+splinter = "*"
+fire = "*"
 
 # Coverage
 coverage = "~=4.0"
 "coverage.space" = "~=0.8"
-
-# Documentation
-mkdocs = "*"
-docutils = "*"
-pygments = "*"
-
-# Build
-wheel = "*"
-pyinstaller = "*"
-
-# Release
-twine = "*"
 
 # Tooling
 sniffer = "*"

@@ -36,13 +36,18 @@ doctor: ## Check for required system dependencies
 
 # PROJECT DEPENDENCIES ########################################################
 
-DEPENDENCIES := $(ENV)/.installed
+BACKEND_DEPENDENCIES := $(ENV)/.checksum-$(shell bin/checksum Pipfile.lock)
+FRONTEND_DEPENDENCIES :=
 
 .PHONY: install
-install: $(DEPENDENCIES) ## Install project dependencies
+	install: $(BACKEND_DEPENDENCIES) $(FRONTEND_DEPENDENCIES) ## Install project dependencies
 
-$(DEPENDENCIES): Pipfile*
+$(BACKEND_DEPENDENCIES):
 	pipenv install --dev
+	@ touch $@
+
+$(FRONTEND_DEPENDENCIES):
+	# TODO: Build frontend if applicable
 	@ touch $@
 
 # BUILD TARGETS ###############################################################
