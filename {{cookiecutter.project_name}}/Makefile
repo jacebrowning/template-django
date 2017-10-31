@@ -25,10 +25,6 @@ doctor: ## Check for required system dependencies
 	bin/verchew
 
 .envrc:
-	echo export PYTHONUNBUFFERED=true >> $@
-	echo export PIPENV_SHELL_COMPAT=true >> $@
-	echo export PIPENV_VENV_IN_PROJECT=true >> $@
-	echo >> $@
 	echo export SECRET_KEY=local >> $@
 	echo export DATABASE_URL=postgresql://localhost/{{cookiecutter.project_name}}_dev >> $@
 	direnv allow
