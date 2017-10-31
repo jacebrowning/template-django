@@ -91,7 +91,7 @@ check: check-backend ## Run static analysis
 
 .PHONY: check-backend
 check-backend: install
-	$(RUN) pylint $(PYTHON_PACKAGESv) tests --rcfile=.pylint.ini
+	$(RUN) pylint $(PYTHON_PACKAGES) tests --rcfile=.pylint.ini
 	$(RUN) pycodestyle $(PYTHON_PACKAGES) tests --config=.pycodestyle.ini
 
 .PHONY: check-frontend

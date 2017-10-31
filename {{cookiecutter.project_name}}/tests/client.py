@@ -9,6 +9,7 @@ Usage:
 
 """
 
+import os
 import time
 
 import fire
@@ -25,7 +26,8 @@ def run():
 
 
 def _launch_browser():
-    user.browser.visit("http://localhost:8000/")
+    user.site = os.getenv('SITE', "http://localhost:5000")
+    user.visit("/")
 
 
 def _execute_command():

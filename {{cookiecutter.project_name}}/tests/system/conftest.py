@@ -17,7 +17,7 @@ def pytest_configure(config):
     logging.getLogger('selenium').setLevel(logging.WARNING)
 
 
-@pytest.yield_fixture(scope='module', autouse=True)
+@pytest.yield_fixture(scope='session', autouse=True)
 def browser():
     with Browser('firefox') as browser:
         user.site = os.getenv('SITE', "http://localhost:5001")
@@ -26,7 +26,7 @@ def browser():
         start = time.time()
         while site_loading():
             time.sleep(0.5)
-            if time.time() - start > 60:
+            if time.time() - start > 10:
                 raise RuntimeError("Site failed to load")
 
         yield

@@ -2,7 +2,7 @@ version: 2
 
 jobs:
   build:
-    working_directory: ~/mediavouch
+    working_directory: ~/{{cookiecutter.project_name}}
 
     docker:
       - image: maketested/python-clojure:latest
@@ -11,12 +11,12 @@ jobs:
           PIPENV_NOSPIN: true
           PIPENV_HIDE_EMOJIS: true
           HEROKU_APP_NAME: circleci
-          DATABASE_URL: postgres://circleci:@127.0.0.1:5432/mediavouch_test
+          DATABASE_URL: postgres://circleci:@127.0.0.1:5432/{{cookiecutter.project_name}}_test
           RANDOM_SEED: 0
       - image: circleci/postgres:9.6-alpine-ram
         environment:
           - POSTGRES_USER=circleci
-          - POSTGRES_DB=mediavouch_test
+          - POSTGRES_DB={{cookiecutter.project_name}}_test
 
     steps:
       # Get code

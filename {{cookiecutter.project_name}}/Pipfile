@@ -9,17 +9,24 @@ python_version = "{{cookiecutter.python_major_version}}.{{cookiecutter.python_mi
 
 [packages]
 
-Django = "~=1.11"
+# Django
+django = "~=1.11"
 django-allauth = "*"
 django-flat-responsive = "*"
 
+# Django REST Framework
 djangorestframework = "~=3.6.3"
 drf-nested-routers = "*"
 django-rest-swagger = "*"
 
+# Database
 dj-database-url = "==0.4.2"
 psycopg2 = "~=2.6"
 
+# Scripts
+faker = "*"
+
+# Server
 whitenoise = "~=3.3"
 gunicorn = "~=19.7"
 

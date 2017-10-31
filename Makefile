@@ -16,7 +16,7 @@ ci: build $(DEMO)/Pipfile.lock
 .PHONY: watch
 watch: install
 	rm -rf $(DEMO)
-	pipenv run watchmedo shell-command --command="clear; make ci" --recursive {{cookiecutter.project_name}}
+	pipenv run watchmedo shell-command --command="clear; make ci" --recursive --wait {{cookiecutter.project_name}}
 
 # DEPENDENCIES ################################################################
 
@@ -31,10 +31,7 @@ $(ENV): Pipfile*
 .PHONY: build
 build: install
 	pipenv run cookiecutter . --no-input --overwrite-if-exists
-
-$(DEMO)/Pipfile.lock: $(DEMO)/Pipfile
-	cd $(DEMO) && pipenv install --dev --skip-lock && pipenv lock
-	@ touch $@
+	cd demo_project && pipenv install --dev
 
 # CLEANUP #####################################################################
 
