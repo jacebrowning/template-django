@@ -1,4 +1,3 @@
-export PIPENV_SHELL_COMPAT=true
 export PIPENV_VENV_IN_PROJECT=true
 
 ENV := .venv
