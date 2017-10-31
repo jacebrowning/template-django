@@ -31,6 +31,7 @@ doctor: ## Check for required system dependencies
 	echo >> $@
 	echo export SECRET_KEY=local >> $@
 	echo export DATABASE_URL=postgresql://localhost/{{cookiecutter.project_name}}_dev >> $@
+	direnv allow
 
 # PROJECT DEPENDENCIES ########################################################
 
