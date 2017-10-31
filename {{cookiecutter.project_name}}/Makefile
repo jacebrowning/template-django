@@ -140,7 +140,7 @@ test-system: install
 
 .PHONY: run
 run: .envrc install ## Run the applicaiton
-	$(RUN) python manage.py runserver $${PORT:-5000}
+	$(RUN) python manage.py runserver
 
 .PHONY: run-prod
 run-prod: .envrc install ## Run the application (simulate production)

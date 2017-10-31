@@ -25,7 +25,7 @@ def run():
 
 
 def _launch_browser():
-    user.browser.visit("http://localhost:5000/")
+    user.browser.visit("http://localhost:8000/")
 
 
 def _execute_command():
