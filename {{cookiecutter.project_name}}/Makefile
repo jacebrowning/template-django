@@ -17,7 +17,7 @@ ci: check test ## CI | Run all validation targets
 watch: install ## CI | Rerun all validation targests in a loop
 	@ rm -rf $(FAILURES)
 	- HOMEBREW_NO_AUTO_UPDATE=true brew install terminal-notifier
-	- $(PIP) install MacFSEvents pync
+	- pipenv run pip install MacFSEvents pync
 	$(RUN) sniffer
 
 # SYSTEM DEPENDENCIES #########################################################
@@ -36,18 +36,14 @@ doctor: ## Check for required system dependencies
 
 # PROJECT DEPENDENCIES ########################################################
 
-PIP := $(ENV)/bin/pip
 DEPENDENCIES := $(ENV)/.installed
 
 .PHONY: install
 install: $(DEPENDENCIES) ## Install project dependencies
 
-$(DEPENDENCIES): $(PIP) Pipfile*
+$(DEPENDENCIES): Pipfile*
 	pipenv install --dev
 	@ touch $@
-
-$(PIP):
-	pipenv --python=python3.6
 
 # BUILD TARGETS ###############################################################
 
