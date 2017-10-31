@@ -9,7 +9,7 @@ ENV := .venv
 all: install
 
 .PHONY: ci
-ci: build
+ci: build demo_project/Pipfile.lock
 	make ci -C demo_project
 
 .PHONY: watch
@@ -29,6 +29,9 @@ $(ENV): Pipfile*
 .PHONY: build
 build: install
 	pipenv run cookiecutter . --no-input --overwrite-if-exists
+
+demo_project/Pipfile.lock:
+	cd demo_project && pipenv lock
 
 # CLEANUP #####################################################################
 
