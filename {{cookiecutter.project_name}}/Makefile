@@ -82,8 +82,8 @@ PYTHON_PACKAGES := config {{cookiecutter.project_name}}
 
 FAILURES := .cache/v/cache/lastfailed
 
-ifndef DISABLE_COVERAGE
-PYTEST_OPTIONS := --cov={{cookiecutter.project_name}} --cov-report=html --cov-report=term-missing:skip-covered
+ifdef DISABLE_COVERAGE
+PYTEST_OPTIONS := --no-cov
 endif
 
 .PHONY: check
