@@ -17,7 +17,12 @@ INSTALLED_APPS = [
     'django.contrib.postgres',
     'rest_framework',
     'corsheaders',
+
+    '{{cookiecutter.project_name}}.core',
+
     '{{cookiecutter.project_name}}.{{cookiecutter.first_app_name}}',
+
+    '{{cookiecutter.project_name}}.api',
 ]
 
 MIDDLEWARE = [

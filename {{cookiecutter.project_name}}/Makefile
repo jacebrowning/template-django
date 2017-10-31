@@ -67,8 +67,8 @@ migrate: install ## Database | Run database migrations
 .PHONY: data
 data: install migrate ## Database | Seed data for manual testing
 	$(RUN) python manage.py gendata
-	$(RUN) python manage.py loaddata foo
-	$(RUN) python manage.py loaddata bar
+	# TODO: Load test data and fixtures
+	# $(RUN) python manage.py loaddata content
 
 .PHONY: reset
 reset: install ## Database | Create a new database, migrate, and seed it
