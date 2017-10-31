@@ -78,12 +78,12 @@ reset: install ## Database | Create a new database, migrate, and seed it
 
 # VALIDATION TARGETS ##########################################################
 
-PYTHON_PACKAGES := config {{cookiecutter.project_name}} tests
+PYTHON_PACKAGES := config {{cookiecutter.project_name}}
 
 FAILURES := .cache/v/cache/lastfailed
 
 ifndef DISABLE_COVERAGE
-PYTEST_OPTIONS := --cov={{cookiecutter.project_name}} --cov-report=html --cov-report=term-missing:skip-covered --no-cov-on-fail
+PYTEST_OPTIONS := --cov={{cookiecutter.project_name}} --cov-report=html --cov-report=term-missing:skip-covered
 endif
 
 .PHONY: check
@@ -91,8 +91,8 @@ check: check-backend ## Run static analysis
 
 .PHONY: check-backend
 check-backend: install
-	$(RUN) pylint $(PYTHON_PACKAGES) tests/system --rcfile=.pylint.ini
-	$(RUN) pycodestyle $(PYTHON_PACKAGES) tests/system --config=.pycodestyle.ini
+	$(RUN) pylint $(PYTHON_PACKAGESv) tests --rcfile=.pylint.ini
+	$(RUN) pycodestyle $(PYTHON_PACKAGES) tests --config=.pycodestyle.ini
 
 .PHONY: check-frontend
 check-frontend: install
@@ -107,7 +107,7 @@ test-backend: test-backend-all
 .PHONY: test-backend-unit
 test-backend-unit: install
 	@- mv $(FAILURES) $(FAILURES).bak
-	$(RUN) py.test $(PYTHON_PACKAGES) $(PYTEST_OPTIONS)
+	$(RUN) py.test {{cookiecutter.project_name}} $(PYTEST_OPTIONS)
 	@- mv $(FAILURES).bak $(FAILURES)
 	$(RUN) coverage.space {{cookiecutter.github_username}}/{{cookiecutter.github_repo}} unit
 

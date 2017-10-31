@@ -33,7 +33,8 @@ build: install
 	pipenv run cookiecutter . --no-input --overwrite-if-exists
 
 $(DEMO)/Pipfile.lock: $(DEMO)/Pipfile
-	cd $(DEMO) && pipenv lock
+	cd $(DEMO) && pipenv install --dev --skip-lock && pipenv lock
+	@ touch $@
 
 # CLEANUP #####################################################################
 

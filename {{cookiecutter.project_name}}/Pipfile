@@ -10,8 +10,12 @@ python_version = "{{cookiecutter.python_major_version}}.{{cookiecutter.python_mi
 [packages]
 
 Django = "~=1.11"
+django-allauth = "*"
+django-flat-responsive = "*"
+
 djangorestframework = "~=3.6.3"
-django-cors-headers = "~=1.2.0"
+drf-nested-routers = "*"
+django-rest-swagger = "*"
 
 dj-database-url = "==0.4.2"
 psycopg2 = "~=2.6"
@@ -32,15 +36,15 @@ pytest-django = "*"
 pytest-describe = "==0.11.0"
 pytest-expecter = "==0.2.2.post6"
 pytest-cov = "*"
-pytest-random = "*"
+pytest-randomly = "*"
 pytest-catchlog = "*"
-splinter = "*"
-fire = "*"
 
 # Coverage
 coverage = "~=4.0"
 "coverage.space" = "~=0.8"
 
 # Tooling
-sniffer = "*"
 honcho = "*"
+splinter = "*"
+fire = "*"
+sniffer = "*"

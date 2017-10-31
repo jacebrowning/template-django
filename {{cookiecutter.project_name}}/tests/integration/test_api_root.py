@@ -12,7 +12,7 @@ def describe_root():
 
     def describe_GET():
 
-        def it_always_returns_200(admin_client):
-            response = admin_client.get(index)
+        def it_always_returns_200(client, index):
+            response = client.get(index)
 
             expect(response.status_code) == 200
