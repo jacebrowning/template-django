@@ -32,7 +32,7 @@ $(ENV): Pipfile*
 build: install
 	pipenv run cookiecutter . --no-input --overwrite-if-exists
 
-$(DEMO)/Pipfile.lock:
+$(DEMO)/Pipfile.lock: $(DEMO)/Pipfile
 	cd $(DEMO) && pipenv lock
 
 # CLEANUP #####################################################################

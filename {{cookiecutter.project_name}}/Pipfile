@@ -28,6 +28,7 @@ pydocstyle = "~=2.0"
 
 # Testing
 pytest = "~=3.0.7"
+pytest-django = "*"
 pytest-describe = "==0.11.0"
 pytest-expecter = "==0.2.2.post6"
 pytest-cov = "*"

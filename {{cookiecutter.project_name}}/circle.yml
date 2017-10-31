@@ -1,27 +1,50 @@
-machine:
-  python:
-    version: {{cookiecutter.python_major_version}}.{{cookiecutter.python_minor_version}}
-  environment:
-    RANDOM_SEED: 0
-    PIPENV_NOSPIN: true
+version: 2
 
-dependencies:
-  pre:
-    - pip install pipenv==8.2.7
-    - sudo apt-get update && sudo apt-get install libpango1.0-0 && sudo apt-get install firefox && sudo ln -sf /usr/lib/firefox/firefox /usr/bin/firefox
-    - wget https://github.com/mozilla/geckodriver/releases/download/v0.17.0/geckodriver-v0.17.0-linux64.tar.gz && tar -xvzf geckodriver-v0.17.0-linux64.tar.gz && chmod +x geckodriver && sudo cp geckodriver /usr/local/bin/
-    - make doctor
-  override:
-    - make install
-  cache_directories:
-    - ~/.cache/pip
-    - .venv
+jobs:
+  build:
+    working_directory: ~/mediavouch
 
-test:
-  pre:
-    - make reset
-  override:
-    - make check
-    - make test-unit
-    - make test-integration
-    - make test-system
+    docker:
+      - image: maketested/python-clojure:latest
+        environment:
+          PIPENV_VENV_IN_PROJECT: true
+          PIPENV_NOSPIN: true
+          PIPENV_HIDE_EMOJIS: true
+          HEROKU_APP_NAME: circleci
+          DATABASE_URL: postgres://circleci:@127.0.0.1:5432/mediavouch_test
+          RANDOM_SEED: 0
+      - image: circleci/postgres:9.6-alpine-ram
+        environment:
+          - POSTGRES_USER=circleci
+          - POSTGRES_DB=mediavouch_test
+
+    steps:
+      # Get code
+      - checkout
+
+      # Check system dependencies
+      - run: make doctor
+
+      # Restore cache
+      - type: cache-restore
+        key: pipenv-\{\{ checksum "Pipfile.lock" \}\}
+
+      # Install project dependencies
+      - run: make install
+
+      # Store cache
+      - type: cache-save
+        key: pipenv-\{\{ checksum "Pipfile.lock" \}\}
+        paths:
+          - .venv
+
+      # Backend tests
+      - run: make check-backend
+      - run: make test-backend
+
+      # Frontend tests
+      - run: make test-frontend
+
+      # End-to-end test
+      - run: make data DJANGO_SETTINGS_MODULE=config.settings.staging SECRET_KEY=staging
+      - run: make test-system

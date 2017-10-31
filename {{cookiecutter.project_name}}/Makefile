@@ -1,14 +1,16 @@
 ifdef CIRCLECI
-ENV := /home/ubuntu/virtualenvs/venv-3.6.1
+	ENV := .venv
+	RUN := pipenv run
 else ifdef HEROKU_APP_NAME
-ENV := .
+	ENV := .
+	SKIP_INSTALL := true
 else
-ENV := .venv
-RUN := pipenv run
+	ENV := .venv
+	RUN := pipenv run
 endif
 
 .PHONY: all
-all: install build
+all: install
 
 .PHONY: ci
 ci: check test ## CI | Run all validation targets
@@ -16,8 +18,7 @@ ci: check test ## CI | Run all validation targets
 .PHONY: watch
 watch: install ## CI | Rerun all validation targests in a loop
 	@ rm -rf $(FAILURES)
-	- HOMEBREW_NO_AUTO_UPDATE=true brew install terminal-notifier
-	- pipenv run pip install MacFSEvents pync
+	@ pipenv run pip install MacFSEvents > /dev/null
 	$(RUN) sniffer
 
 # SYSTEM DEPENDENCIES #########################################################
@@ -40,21 +41,17 @@ BACKEND_DEPENDENCIES := $(ENV)/.checksum-$(shell bin/checksum Pipfile.lock)
 FRONTEND_DEPENDENCIES :=
 
 .PHONY: install
+ifndef SKIP_INSTALL
 install: $(BACKEND_DEPENDENCIES) $(FRONTEND_DEPENDENCIES) ## Install project dependencies
+endif
 
 $(BACKEND_DEPENDENCIES):
 	pipenv install --dev
 	@ touch $@
 
 $(FRONTEND_DEPENDENCIES):
-	# TODO: Build frontend if applicable
+	# TODO: Install frontend dependencies if applicable
 	@ touch $@
-
-# BUILD TARGETS ###############################################################
-
-.PHONY: build
-build:
-	@ echo "TODO: compile frontend code"
 
 .PHONY: clean
 clean:
@@ -73,14 +70,10 @@ migrate: install ## Database | Run database migrations
 	$(RUN) python manage.py migrate
 
 .PHONY: data
-ifdef HEROKU_APP_NAME
-data: ## Database | Seed data for manual testing
-else
-data: install migrate
-endif
-	$(RUN) python manage.py loaddata users
-	$(RUN) python manage.py loaddata content
-	$(RUN) python manage.py cleandata
+data: install migrate ## Database | Seed data for manual testing
+	$(RUN) python manage.py gendata
+	$(RUN) python manage.py loaddata foo
+	$(RUN) python manage.py loaddata bar
 
 .PHONY: reset
 reset: install ## Database | Create a new database, migrate, and seed it
@@ -94,36 +87,59 @@ PYTHON_PACKAGES := config {{cookiecutter.project_name}} tests
 
 FAILURES := .cache/v/cache/lastfailed
 
+ifndef DISABLE_COVERAGE
+PYTEST_OPTIONS := --cov={{cookiecutter.project_name}} --cov-report=html --cov-report=term-missing:skip-covered --no-cov-on-fail
+endif
+
 .PHONY: check
-check: install ## Run static analysis
-	$(RUN) pylint $(PYTHON_PACKAGES) --rcfile=.pylint.ini
-	$(RUN) pycodestyle $(PYTHON_PACKAGES) --config=.pycodestyle.ini
+check: check-backend ## Run static analysis
+
+.PHONY: check-backend
+check-backend: install
+	$(RUN) pylint $(PYTHON_PACKAGES) tests/system --rcfile=.pylint.ini
+	$(RUN) pycodestyle $(PYTHON_PACKAGES) tests/system --config=.pycodestyle.ini
+
+.PHONY: check-frontend
+check-frontend: install
+	# TODO: Run frontend linters if applicable
 
 .PHONY: test
-test: install ## Run all tests
-	@ if test -e $(FAILURES); then $(RUN) py.test {{cookiecutter.project_name}} tests/integration; fi
-	@ rm -rf $(FAILURES)
-	$(RUN) py.test {{cookiecutter.project_name}} tests/integration
-	$(RUN) coverage.space {{cookiecutter.github_username}}/{{cookiecutter.github_repo}} overall
+test: test-backend test-frontend ## Run all tests
 
-.PHONY: test-unit
-test-unit: install
-	@ if test -e $(FAILURES); then $(RUN) py.test {{cookiecutter.project_name}}; fi
-	@ rm -rf $(FAILURES)
-	$(RUN) py.test {{cookiecutter.project_name}}
+.PHONY: test-backend
+test-backend: test-backend-all
+
+.PHONY: test-backend-unit
+test-backend-unit: install
+	@- mv $(FAILURES) $(FAILURES).bak
+	$(RUN) py.test $(PYTHON_PACKAGES) $(PYTEST_OPTIONS)
+	@- mv $(FAILURES).bak $(FAILURES)
 	$(RUN) coverage.space {{cookiecutter.github_username}}/{{cookiecutter.github_repo}} unit
 
-.PHONY: test-integration
-test-integration: install
+.PHONY: test-backend-integration
+test-backend-integration: install
 	@ if test -e $(FAILURES); then $(RUN) py.test tests/integration; fi
 	@ rm -rf $(FAILURES)
-	$(RUN) py.test tests/integration
+	$(RUN) py.test tests/integration $(PYTEST_OPTIONS)
 	$(RUN) coverage.space {{cookiecutter.github_username}}/{{cookiecutter.github_repo}} integration
+
+.PHONY: test-backend-all
+test-backend-all: install
+	@ if test -e $(FAILURES); then $(RUN) py.test $(PYTHON_PACKAGES) tests/integration; fi
+	@ rm -rf $(FAILURES)
+	$(RUN) py.test $(PYTHON_PACKAGES) tests/integration $(PYTEST_OPTIONS)
+	$(RUN) coverage.space {{cookiecutter.github_username}}/{{cookiecutter.github_repo}} overall
+
+.PHONY: test-frontend
+test-frontend: test-frontend-unit
+
+.PHONY: test-frontend-unit
+test-frontend-unit: install
+	# TODO: Run frontend tests if applicable
 
 .PHONY: test-system
 test-system: install
 	$(RUN) honcho start --procfile=tests/system/Procfile --env=tests/system/.env
-	@ rm -rf $(FAILURES)
 
 # SERVER TARGETS ##############################################################
 
