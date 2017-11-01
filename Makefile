@@ -2,7 +2,8 @@ export PIPENV_VENV_IN_PROJECT=true
 
 ENV := .venv
 
-DEMO := demo_project
+INPUT := {{cookiecutter.project_name}}
+OUTPUT := demo_project
 
 # MAIN ########################################################################
 
@@ -10,13 +11,14 @@ DEMO := demo_project
 all: install
 
 .PHONY: ci
-ci: build $(DEMO)/Pipfile.lock
-	make ci -C $(DEMO)
+ci: build
+	make ci -C $(OUTPUT)
 
 .PHONY: watch
 watch: install
-	rm -rf $(DEMO)
-	pipenv run watchmedo shell-command --command="clear; make ci" --recursive --wait {{cookiecutter.project_name}}
+	rm -rf $(OUTPUT)/*
+	@ sleep 2 && touch $(INPUT)/Pipfile &
+	pipenv run watchmedo shell-command --command="clear; make ci" --recursive --wait $(INPUT)
 
 # DEPENDENCIES ################################################################
 
@@ -37,5 +39,5 @@ build: install
 
 .PHONY: clean
 clean:
-	rm -rf $(DEMO)
+	rm -rf $(OUTPUT)
 	rm -rf $(ENV)
