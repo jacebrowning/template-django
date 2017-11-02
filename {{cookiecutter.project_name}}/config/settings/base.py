@@ -78,7 +78,7 @@ LOGGING = {
             'handlers':['console'],
             'level':'INFO',
         },
-        '{{cookiecutter.first_app_name}}': {
+        '{{cookiecutter.project_name}}': {
             'handlers': ['console'],
             'level': 'DEBUG',
         },
