@@ -2,6 +2,7 @@ import random
 from contextlib import suppress
 
 from django.conf import settings
+from django.contrib.auth import get_user_model
 from django.contrib.sites.models import Site
 from django.core.management.base import BaseCommand
 from django.db.utils import IntegrityError
@@ -11,7 +12,7 @@ from faker import Faker
 # from {{cookiecutter.project_name}}.{{cookiecutter.first_app_name}} import models
 
 
-User = settings.AUTH_USER_MODEL
+User = get_user_model()
 
 
 class Command(BaseCommand):
