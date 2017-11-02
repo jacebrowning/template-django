@@ -8,7 +8,10 @@ from django.db.utils import IntegrityError
 
 from faker import Faker
 
-from {{cookiecutter.project_name}}.{{cookiecutter.first_app_name}} import models
+# from {{cookiecutter.project_name}}.{{cookiecutter.first_app_name}} import models
+
+
+User = settings.AUTH_USER_MODEL
 
 
 class Command(BaseCommand):
@@ -41,14 +44,14 @@ class Command(BaseCommand):
 
     def get_or_create_superuser(self, username="admin", password="password"):
         try:
-            user = models.User.objects.create_superuser(
+            user = User.objects.create_superuser(
                 username=username,
                 email=f"{username}@{settings.BASE_DOMAIN}",
                 password=password,
             )
             self.stdout.write(f"Created new superuser: {user}")
         except IntegrityError:
-            user = models.User.objects.get(username=username)
+            user = User.objects.get(username=username)
             self.stdout.write(f"Found existing superuser: {user}")
 
         return user
@@ -56,7 +59,7 @@ class Command(BaseCommand):
     def get_or_create_user(self, base_email, password="password"):
         username, email_domain = base_email.split('@')
 
-        user, created = models.User.objects.get_or_create(username=username)
+        user, created = User.objects.get_or_create(username=username)
         user.email = f"{username}+{settings.BASE_NAME}@{email_domain}"
         user.set_password(password)
         user.save()
@@ -69,10 +72,10 @@ class Command(BaseCommand):
         return user
 
     def generate_review_data(self, *users):
-        count = models.User.objects.count()
+        count = User.objects.count()
         while count < 50:
             with suppress(IntegrityError):
-                user = models.User.objects.create(
+                user = User.objects.create(
                     username=self.fake_username(),
                 )
                 self.stdout.write(f"Created user: {user}")
@@ -85,7 +88,7 @@ class Command(BaseCommand):
         skip_ids = [self.new_user_id]
         if skip:
             skip_ids.append(skip.id)
-        return random.choice(models.User.objects.exclude(id__in=skip_ids))
+        return random.choice(User.objects.exclude(id__in=skip_ids))
 
     def fake_username(self):
         return self.fake.name().replace(' ', '').lower()
