@@ -27,6 +27,8 @@ doctor: ## Check for required system dependencies
 .envrc:
 	echo export SECRET_KEY=local >> $@
 	echo export DATABASE_URL=postgresql://localhost/{{cookiecutter.project_name}}_dev >> $@
+	echo >> $@
+	echo export TEST_EMAILS=you@yourdomain.com >> $@
 	direnv allow
 
 # PROJECT DEPENDENCIES ########################################################
@@ -66,7 +68,7 @@ migrate: install ## Database | Run database migrations
 
 .PHONY: data
 data: install migrate ## Database | Seed data for manual testing
-	$(RUN) python manage.py gendata
+	$(RUN) python manage.py gendata $(TEST_EMAILS)
 	# TODO: Load test data and fixtures
 	# $(RUN) python manage.py loaddata content
 
