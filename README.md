@@ -1,6 +1,6 @@
 # template-django
 
-Generates the structure for a Django application using [cookiecutter][cookiecutter].
+Generates the structure for a Django application using [cookiecutter](https://github.com/audreyr/cookiecutter).
 
 Unix: [![Unix Build Status](https://img.shields.io/travis/jacebrowning/template-django/master.svg)](https://travis-ci.org/jacebrowning/template-django)
 Windows: [![Windows Build Status](https://img.shields.io/appveyor/ci/jacebrowning/template-django.svg)](https://ci.appveyor.com/project/jacebrowning/template-django)
