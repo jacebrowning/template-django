@@ -13,20 +13,19 @@ If you are instead looking for a [Python library](https://caremad.io/posts/2013/
 
 Install `cookiecutter` and generate a project:
 
-    $ pip install cookiecutter
-    $ cookiecutter gh:jacebrowning/template-django -f
+```
+$ pip install cookiecutter
+$ cookiecutter gh:jacebrowning/template-django -f
+```
 
 Cookiecutter will ask you for some basic info (your name, project name, python package name, etc.) and generate a base Python project for you.
 
 ## Features
 
-* Preconfigured setup for [Travis-CI][travis], [Coveralls][coveralls], and [Scrutinizer][scrutinizer]
 * `Makefile` for automating common development tasks:
     - Installing dependencies into a virtual environment using `pipenv`
-    - Running tests
+    - Generate superuser and other fixtures to seed the database
+    - Running tests against the backend and frontend
     - Running style checkers (`pycodestyle`/`pydocstyle`) and linters (`pylint`)
-
-[cookiecutter]: https://github.com/audreyr/cookiecutter
-[travis]: https://travis-ci.org/
-[coveralls]: https://coveralls.io/
-[scrutinizer]: https://scrutinizer-ci.com/
+* Continuous Integration via [CircleCI](https://circleci.com/docs/2.0/)
+* Continuous Delivery via [Heroku](https://www.heroku.com/flow)
