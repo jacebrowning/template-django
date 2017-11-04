@@ -13,7 +13,7 @@ else:
 
 
 watch_paths = [
-    "backend",
+    "{{cookiecutter.project_name}}",
     "config",
     "frontend",
     "tests",
