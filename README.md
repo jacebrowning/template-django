@@ -22,6 +22,10 @@ Cookiecutter will ask you for some basic info (your name, project name, python p
 
 ## Features
 
+* Settings broken out into local, staging, and production
+* API using [Django REST Framework](http://www.django-rest-framework.org/)
+* Unit and integration testing using `pytest`, `pytest-describe`, and `pytest-expecter`
+* End-to-end testing using [Splinter](https://splinter.readthedocs.io/)
 * `Makefile` for automating common development tasks:
     - Installing dependencies into a virtual environment using `pipenv`
     - Generate superuser and other fixtures to seed the database
