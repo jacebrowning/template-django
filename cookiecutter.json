@@ -3,7 +3,5 @@
     "github_username": "jacebrowning",
     "github_repo": "template-django-demo",
     "project_name": "demo_project",
-    "first_app_name": "demo_app",
-    "python_major_version": 3,
-    "python_minor_version": 6
+    "first_app_name": "demo_app"
 }
