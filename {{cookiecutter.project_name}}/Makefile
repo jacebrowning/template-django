@@ -33,7 +33,7 @@ doctor: ## Check for required system dependencies
 
 # PROJECT DEPENDENCIES ########################################################
 
-BACKEND_DEPENDENCIES := tmp/.pipenv-$(shell bin/checksum Pipfile.lock)
+BACKEND_DEPENDENCIES := tmp/.pipenv-$(shell bin/checksum Pipfile*)
 FRONTEND_DEPENDENCIES :=
 
 .PHONY: install
