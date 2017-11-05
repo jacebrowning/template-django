@@ -29,7 +29,7 @@ doctor: ## Check for required system dependencies
 	echo export DATABASE_URL=postgresql://localhost/{{cookiecutter.project_name}}_dev >> $@
 	echo >> $@
 	echo export TEST_EMAILS=you@yourdomain.com >> $@
-	direnv allow
+	- direnv allow
 
 # PROJECT DEPENDENCIES ########################################################
 
