@@ -26,7 +26,7 @@ def run():
 
 
 def _launch_browser():
-    user.site = os.getenv('SITE', "http://localhost:5000")
+    user.site = os.getenv('SITE', "http://localhost:8000")
     user.visit("/")
 
 

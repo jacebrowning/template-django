@@ -1,2 +1,2 @@
-web: python manage.py collectstatic --no-input --verbosity=0 && gunicorn config.wsgi --bind=127.0.0.1:5001
+web: python manage.py collectstatic --no-input --verbosity=0 && gunicorn config.wsgi --bind=127.0.0.1:8001
 test: pytest tests/system -c tests/system/pytest.ini

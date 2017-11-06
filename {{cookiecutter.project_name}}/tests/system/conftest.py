@@ -18,6 +18,6 @@ def pytest_configure(config):
 def browser():
     with Browser('firefox') as browser:
         user.browser = browser
-        user.site = os.getenv('SITE', "http://localhost:5001")
+        user.site = os.getenv('SITE', "http://localhost:8001")
         user.visit("/")
         yield browser
