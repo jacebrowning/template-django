@@ -10,49 +10,41 @@ python_version = "3.6.3"
 
 [packages]
 
-# Django
 django = "~=1.11"
 django-allauth = "*"
 django-flat-responsive = "*"
 
-# Django REST Framework
 djangorestframework = "~=3.6.3"
 drf-nested-routers = "*"
 django-rest-swagger = "*"
 
-# Database
 dj-database-url = "==0.4.2"
 psycopg2 = "~=2.6"
 
-# Scripts
 faker = "*"
 
-# Server
 whitenoise = "~=3.3"
 gunicorn = "~=19.7"
 
 [dev-packages]
 
-# Linters
-pylint = "~=1.7"
-pycodestyle = "~=2.3"
-pydocstyle = "~=2.0"
+pylint = "*"
+pycodestyle = "*"
+pydocstyle = "*"
 
-# Testing
-pytest = "~=3.0.7"
+pytest = "~=3.3"
 pytest-django = "*"
 pytest-describe = "*"
 pytest-expecter = "*"
-pytest-cov = "*"
 pytest-randomly = "*"
-pytest-catchlog = "*"
+pytest-cov = "*"
 
-# Coverage
-coverage = "*"
+freezegun = "*"
 "coverage.space" = "*"
 
-# Tooling
 honcho = "*"
 splinter = "*"
 fire = "*"
+
 sniffer = "*"
+pync = "*"
