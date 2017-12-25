@@ -9,7 +9,7 @@ This is a template for a typical Django application following modern packaging c
 
 If you are instead looking for a [Python library](https://caremad.io/posts/2013/07/setup-vs-requirement/) template, check out [jacebrowning/template-python](https://github.com/jacebrowning/template-python).
 
-## Get Started
+## Usage
 
 Install `cookiecutter` and generate a project:
 
@@ -33,3 +33,8 @@ Cookiecutter will ask you for some basic info (your name, project name, python p
     - Running style checkers (`pycodestyle`/`pydocstyle`) and linters (`pylint`)
 * Continuous Integration via [CircleCI](https://circleci.com/docs/2.0/)
 * Continuous Delivery via [Heroku](https://www.heroku.com/flow)
+
+## Updates
+
+Checkout the appropriate branch of [template-django-demo](https://github.com/jacebrowning/template-django-demo) and manually merge changes into your project.
+
