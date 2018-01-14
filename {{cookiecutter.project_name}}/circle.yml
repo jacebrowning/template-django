@@ -10,7 +10,7 @@ jobs:
           PIPENV_VENV_IN_PROJECT: true
           PIPENV_NOSPIN: true
           PIPENV_HIDE_EMOJIS: true
-          HEROKU_APP_NAME: circleci
+          HEROKU_APP_NAME: {{cookiecutter.project_name}}-circleci
           DATABASE_URL: postgres://circleci:@127.0.0.1:5432/{{cookiecutter.project_name}}_test
           RANDOM_SEED: 0
       - image: circleci/postgres:9.6-alpine-ram
