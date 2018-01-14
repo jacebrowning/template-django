@@ -142,7 +142,7 @@ test-system: install
 
 .PHONY: run
 run: .envrc install ## Run the applicaiton
-	$(RUN) python manage.py runserver
+	$(RUN) honcho start --procfile=Procfile.dev --port=$${PORT:-8000}
 
 .PHONY: run-prod
 run-prod: .envrc install ## Run the application (simulate production)
@@ -155,11 +155,9 @@ run-prod: .envrc install ## Run the application (simulate production)
 
 .PHONY: promote
 promote: install
-	SITE=https://staging.{{cookiecutter.project_name}}.com $(RUN) pytest tests/system
+	TEST_SITE=https://staging.{{cookiecutter.project_name}}.com $(RUN) pytest tests/system
 	heroku pipelines:promote --app {{cookiecutter.project_name}}-staging --to {{cookiecutter.project_name}}
-	# TODO: Update system tests so they can run against production
-	# Should have a specific test user name?
-	SITE=https://{{cookiecutter.project_name}}.com $(RUN) pytest tests/system
+	TEST_SITE=https://{{cookiecutter.project_name}}.com $(RUN) pytest tests/system
 
 # HELP ########################################################################
 
