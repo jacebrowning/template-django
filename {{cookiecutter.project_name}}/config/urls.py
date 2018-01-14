@@ -12,6 +12,7 @@ urlpatterns = [
     url('^(?:api|admin).*[^/]$', append_slash_and_redirect),
 
     url('^api/', include('{{cookiecutter.project_name}}.api.urls')),
-    url('^admin/', admin.site.urls),
 
+    url('^admin/', admin.site.urls),
+    url('^grappelli/', include('grappelli.urls')),
 ]
