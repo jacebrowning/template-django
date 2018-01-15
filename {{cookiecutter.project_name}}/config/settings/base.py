@@ -124,4 +124,4 @@ CORS_ORIGIN_ALLOW_ALL = True
 ###############################################################################
 # Grappelli
 
-GRAPPELLI_ADMIN_TITLE = "{{cookiecutter.project_name}} Administration"
+GRAPPELLI_ADMIN_TITLE = "{{cookiecutter.project_name}} Admin"
