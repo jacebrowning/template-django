@@ -81,12 +81,7 @@ reset: install ## Database | Create a new database, migrate, and seed it
 # VALIDATION TARGETS ##########################################################
 
 PYTHON_PACKAGES := config {{cookiecutter.project_name}}
-
 FAILURES := .cache/v/cache/lastfailed
-
-ifdef DISABLE_COVERAGE
-PYTEST_OPTIONS := --no-cov
-endif
 
 .PHONY: check
 check: check-backend ## Run static analysis
@@ -109,7 +104,7 @@ test-backend: test-backend-all
 .PHONY: test-backend-unit
 test-backend-unit: install
 	@- mv $(FAILURES) $(FAILURES).bak
-	$(RUN) py.test $(PYTHON_PACKAGES) $(PYTEST_OPTIONS)
+	$(RUN) py.test $(PYTHON_PACKAGES)
 	@- mv $(FAILURES).bak $(FAILURES)
 	$(RUN) coverage.space {{cookiecutter.github_username}}/{{cookiecutter.github_repo}} unit
 
@@ -117,14 +112,14 @@ test-backend-unit: install
 test-backend-integration: install
 	@ if test -e $(FAILURES); then $(RUN) py.test tests/integration; fi
 	@ rm -rf $(FAILURES)
-	$(RUN) py.test tests/integration $(PYTEST_OPTIONS)
+	$(RUN) py.test tests/integration
 	$(RUN) coverage.space {{cookiecutter.github_username}}/{{cookiecutter.github_repo}} integration
 
 .PHONY: test-backend-all
 test-backend-all: install
 	@ if test -e $(FAILURES); then $(RUN) py.test $(PYTHON_PACKAGES) tests/integration; fi
 	@ rm -rf $(FAILURES)
-	$(RUN) py.test $(PYTHON_PACKAGES) tests/integration $(PYTEST_OPTIONS)
+	$(RUN) py.test $(PYTHON_PACKAGES) tests/integration
 	$(RUN) coverage.space {{cookiecutter.github_username}}/{{cookiecutter.github_repo}} overall
 
 .PHONY: test-frontend
