@@ -8,9 +8,6 @@ jobs:
       - image: maketested/python-clojure:latest
         environment:
           PIPENV_VENV_IN_PROJECT: true
-          PIPENV_NOSPIN: true
-          PIPENV_HIDE_EMOJIS: true
-          HEROKU_APP_NAME: {{cookiecutter.project_name}}-circleci
           DATABASE_URL: postgres://circleci:@127.0.0.1:5432/{{cookiecutter.project_name}}_test
           RANDOM_SEED: 0
       - image: circleci/postgres:9.6-alpine-ram
@@ -19,32 +16,40 @@ jobs:
           - POSTGRES_DB={{cookiecutter.project_name}}_test
 
     steps:
-      # Get code
       - checkout
 
-      # Check system dependencies
-      - run: make doctor
+      - run:
+          name: Checking system dependencies
+          command: make doctor
 
-      # Restore cache
       - type: cache-restore
         key: pipenv-{% raw %}{{ checksum "Pipfile.lock" }}{% endraw %}
 
-      # Install project dependencies
-      - run: make install
+      - run:
+          name: Installing project dependencies
+          command: make install
 
-      # Store cache
       - type: cache-save
         key: pipenv-{% raw %}{{ checksum "Pipfile.lock" }}{% endraw %}
         paths:
           - .venv
 
-      # Backend tests
-      - run: make check-backend
-      - run: make test-backend
+      - run:
+          name: Checking backend code
+          command: make check-backend
 
-      # Frontend tests
-      - run: make test-frontend
+      - run:
+          name: Running backend tests
+          command: make test-backend
 
-      # End-to-end test
-      - run: make data DJANGO_SETTINGS_MODULE=config.settings.staging SECRET_KEY=staging
-      - run: make test-system
+      - run:
+          name: Running frontend tests
+          command: make test-frontend
+
+      - run:
+          name: Running end-to-end tests
+          command: make build data test-system
+          environment:
+            DJANGO_SETTINGS_MODULE: config.settings.staging
+            HEROKU_APP_NAME: {{cookiecutter.project_name}}-staging
+            SECRET_KEY: staging
