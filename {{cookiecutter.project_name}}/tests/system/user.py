@@ -21,12 +21,6 @@ def is_logged_out():
     return browser.is_element_present_by_text("login")
 
 
-def wait_for_load(delay=0.25):
-    time.sleep(delay)
-    while is_loading():
-        time.sleep(delay)
-
-
 def signup(username, email, password):
     logout()
 
@@ -37,7 +31,7 @@ def signup(username, email, password):
     browser.fill('password', password)
 
     browser.find_by_text("Sign up").first.click()
-    wait_for_load()
+    wait()
 
 
 def login(username=None, password=None):
@@ -60,7 +54,7 @@ def login(username=None, password=None):
     browser.fill('password', password)
 
     browser.find_by_name('login').first.click()
-    wait_for_load()
+    wait()
 
     if using_default_credentials:
         assert is_logged_in()
@@ -80,3 +74,9 @@ def goto_home(_login=True):
         login()
 
     visit("/")
+
+
+def wait(delay=0.25):
+    time.sleep(delay)
+    while is_loading():
+        time.sleep(delay)

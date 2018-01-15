@@ -9,6 +9,11 @@ from splinter import Browser
 from . import user
 
 
+PORT = int(os.getenv('TEST_PORT', 8001))
+SITE = os.getenv('TEST_SITE', f"http://localhost:{PORT}")
+HEADLESS = bool(os.getenv('TEST_HEADLESS'))
+
+
 def pytest_configure(config):
     logging.basicConfig(level=logging.DEBUG)
     logging.getLogger('selenium').setLevel(logging.WARNING)
@@ -16,8 +21,8 @@ def pytest_configure(config):
 
 @pytest.yield_fixture(scope='session', autouse=True)
 def browser():
-    with Browser('firefox') as browser:
+    with Browser('firefox', headless=HEADLESS) as browser:
         user.browser = browser
-        user.site = os.getenv('SITE', "http://localhost:8001")
+        user.site = SITE
         user.visit("/")
         yield browser

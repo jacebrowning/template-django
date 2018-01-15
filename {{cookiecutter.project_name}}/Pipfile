@@ -10,11 +10,11 @@ python_version = "3.6.3"
 
 [packages]
 
-django = "~=1.11"
+django = "~=2.0"
 django-allauth = "*"
-django-flat-responsive = "*"
+django-grappelli = "*"
 
-djangorestframework = "~=3.6.3"
+djangorestframework = "~=3.7"
 drf-nested-routers = "*"
 django-rest-swagger = "*"
 
@@ -27,6 +27,8 @@ whitenoise = "~=3.3"
 gunicorn = "~=19.7"
 
 [dev-packages]
+
+django-livereload-server = "*"
 
 pylint = "*"
 pycodestyle = "*"

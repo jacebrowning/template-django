@@ -18,6 +18,9 @@ from splinter import Browser
 from .system import user
 
 
+SITE = os.getenv('TEST_SITE', "http://localhost:8000")
+
+
 def run():
     with Browser('firefox') as user.browser:
         _launch_browser()
@@ -26,7 +29,7 @@ def run():
 
 
 def _launch_browser():
-    user.site = os.getenv('SITE', "http://localhost:8000")
+    user.site = SITE
     user.visit("/")
 
 

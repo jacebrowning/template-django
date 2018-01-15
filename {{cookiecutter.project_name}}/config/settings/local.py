@@ -17,6 +17,14 @@ ALLOWED_HOSTS = [
     '.ngrok.io',
 ]
 
+INSTALLED_APPS += [
+    'livereload',
+]
+
+MIDDLEWARE += [
+    'livereload.middleware.LiveReloadScript',
+]
+
 ###############################################################################
 # Databases
 

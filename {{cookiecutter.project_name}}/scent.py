@@ -40,7 +40,7 @@ def backend_files(path):
 @select_runnable('frontend_targets')
 @file_validator
 def frontend_files(path):
-    return matches(path, 'clj', 'cljs')
+    return matches(path, 'html', 'js')
 
 
 @select_runnable('system_targets')
@@ -76,7 +76,7 @@ def system_targets(*_args):
     if options.skip():
         return True
     return run("System", [
-        ("Tests", "make test-system", False),
+        ("Tests", "make test-system TEST_HEADLESS=true", False),
         ("Static Analysis", "make check-backend", True),
     ])
 

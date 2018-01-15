@@ -8,6 +8,8 @@ PROJECT_ROOT = os.path.dirname(CONFIG_ROOT)
 # Core
 
 INSTALLED_APPS = [
+    'grappelli',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -17,14 +19,14 @@ INSTALLED_APPS = [
     'django.contrib.postgres',
     'django.contrib.sites',
 
-    '{{cookiecutter.project_name}}.core',
-    '{{cookiecutter.project_name}}.{{cookiecutter.first_app_name}}',
-    '{{cookiecutter.project_name}}.api',
-
     'allauth',
     'allauth.account',
     'rest_framework',
-    'rest_framework_swagger'
+    'rest_framework_swagger',
+
+    '{{cookiecutter.project_name}}.core',
+    '{{cookiecutter.project_name}}.{{cookiecutter.first_app_name}}',
+    '{{cookiecutter.project_name}}.api',
 ]
 
 MIDDLEWARE = [
@@ -88,24 +90,6 @@ LOGGING = {
 SITE_ID = 1
 
 ###############################################################################
-# Auth
-
-AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
-]
-
-###############################################################################
 # Sessions
 
 SESSION_ENGINE = 'django.contrib.sessions.backends.signed_cookies'
@@ -136,3 +120,8 @@ STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
 # CORS
 
 CORS_ORIGIN_ALLOW_ALL = True
+
+###############################################################################
+# Grappelli
+
+GRAPPELLI_ADMIN_TITLE = "{{cookiecutter.project_name}} Admin"
