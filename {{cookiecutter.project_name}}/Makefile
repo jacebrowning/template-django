@@ -54,6 +54,11 @@ $(FRONTEND_DEPENDENCIES):
 clean:
 	rm -rf staticfiles
 	rm -rf .coverage htmlcov
+	rm -rf tmp
+
+.PHONY: clean-all
+clean-all: clean
+	# TODO: Delete all frontend files
 	pipenv --rm
 
 # RUNTIME DEPENDENCIES ########################################################
