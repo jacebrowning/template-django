@@ -2,6 +2,10 @@
 
 # Overview
 
+TODO: Describe this project.
+
+This project was generated with [cookiecutter](https://github.com/audreyr/cookiecutter) using [jacebrowning/template-django](https://github.com/jacebrowning/template-django).
+
 # Setup
 
 ## Requirements
