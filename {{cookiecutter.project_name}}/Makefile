@@ -111,7 +111,7 @@ test-backend: test-backend-all
 .PHONY: test-backend-unit
 test-backend-unit: install
 	@- mv $(FAILURES) $(FAILURES).bak
-	$(RUN) py.test $(PYTHON_PACKAGES)
+	$(RUN) py.test $(PYTHON_PACKAGES) tests/unit
 	@- mv $(FAILURES).bak $(FAILURES)
 	$(RUN) coverage.space {{cookiecutter.github_username}}/{{cookiecutter.github_repo}} unit
 
