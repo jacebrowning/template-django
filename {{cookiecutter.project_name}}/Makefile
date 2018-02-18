@@ -148,10 +148,10 @@ run: .envrc install ## Run the applicaiton
 
 .PHONY: run-prod
 run-prod: .envrc install ## Run the application (simulate production)
-	pipenv shell -c "bin/pre_compile; exit \$$?"
-	pipenv shell -c "bin/post_compile; exit \$$?"
-	pipenv shell -c "heroku local release; exit \$$?"
-	pipenv shell -c "heroku local web; exit \$$?"
+	pipenv shell "bin/pre_compile; exit \$$?"
+	pipenv shell "bin/post_compile; exit \$$?"
+	pipenv shell "heroku local release; exit \$$?"
+	pipenv shell "heroku local web; exit \$$?"
 
 # RELEASE TARGETS #############################################################
 
