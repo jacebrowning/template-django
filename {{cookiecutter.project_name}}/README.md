@@ -27,7 +27,7 @@ $ make doctor
 
 Create a database:
 
-```sh
+```
 $ createdb {{cookiecutter.project_name}}_dev
 ```
 
