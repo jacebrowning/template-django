@@ -13,20 +13,23 @@ INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
-    'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
     'django.contrib.postgres',
+    'django.contrib.sessions',
     'django.contrib.sites',
+    'django.contrib.staticfiles',
 
     'allauth',
     'allauth.account',
+    'corsheaders',
+    'memoize',
     'rest_framework',
     'rest_framework_swagger',
 
+    '{{cookiecutter.project_name}}.api',
     '{{cookiecutter.project_name}}.core',
     '{{cookiecutter.project_name}}.{{cookiecutter.first_app_name}}',
-    '{{cookiecutter.project_name}}.api',
+
 ]
 
 MIDDLEWARE = [
