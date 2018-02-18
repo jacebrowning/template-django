@@ -1,18 +1,10 @@
-from django.conf.urls import url, include
+from django.urls import path, include
 from django.contrib import admin
-from django.shortcuts import redirect
-
-
-def append_slash_and_redirect(request):
-    assert not request.path.endswith('/')
-    return redirect(request.path + '/', permanent=True)
 
 
 urlpatterns = [
-    url('^(?:api|admin).*[^/]$', append_slash_and_redirect),
+    path('api/', include('{{cookiecutter.project_name}}.api.urls')),
 
-    url('^api/', include('{{cookiecutter.project_name}}.api.urls')),
-
-    url('^admin/', admin.site.urls),
-    url('^grappelli/', include('grappelli.urls')),
+    path('admin/', admin.site.urls),
+    path('grappelli/', include('grappelli.urls')),
 ]
