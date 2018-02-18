@@ -27,7 +27,9 @@ doctor: ## Check for required system dependencies
 .envrc:
 	echo export SECRET_KEY=local >> $@
 	echo export DATABASE_URL=postgresql://localhost/{{cookiecutter.project_name}}_dev >> $@
+	echo export REDIS_URL=redis://127.0.0.1:6379/0 >> $@
 	echo >> $@
+	echo export HEROKU_APP_NAME=local >> $@
 	echo export TEST_EMAILS=you@yourdomain.com >> $@
 	- direnv allow
 

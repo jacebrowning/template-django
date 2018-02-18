@@ -9,11 +9,13 @@ jobs:
         environment:
           PIPENV_VENV_IN_PROJECT: true
           DATABASE_URL: postgres://circleci:@127.0.0.1:5432/{{cookiecutter.project_name}}_test
+          REDIS_URL: redis://127.0.0.1:6379/0
           RANDOM_SEED: 0
       - image: circleci/postgres:9.6-alpine-ram
         environment:
           - POSTGRES_USER=circleci
           - POSTGRES_DB={{cookiecutter.project_name}}_test
+      - image: redis
 
     steps:
       - checkout

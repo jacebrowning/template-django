@@ -1,4 +1,5 @@
 import os
+import urllib
 
 import dj_database_url
 
@@ -24,6 +25,21 @@ ALLOWED_HOSTS = [
 
 DATABASES = {}
 DATABASES['default'] = dj_database_url.config()
+
+###############################################################################
+# Caches
+
+_redis = urllib.parse.urlparse(os.environ['REDIS_URL'])
+CACHES = {
+    'default': {
+         'BACKEND': 'redis_cache.RedisCache',
+         'LOCATION': f"{_redis.hostname}:{_redis.port}",
+         'OPTIONS': {
+             'PASSWORD': _redis.password,
+             'DB': 0,
+         },
+    },
+}
 
 ###############################################################################
 # Authentication

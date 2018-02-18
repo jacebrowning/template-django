@@ -6,47 +6,56 @@ name = "pypi"
 
 [requires]
 
-python_version = "3.6.3"
+python_version = "3.6.4"
 
 [packages]
 
+# Django
 django = "~=2.0"
 django-allauth = "*"
+django-cors-headers = "~=1.2.0"
 django-grappelli = "*"
+django-memoize = "*"
 
+# API
 djangorestframework = "~=3.7"
 drf-nested-routers = "*"
 django-rest-swagger = "*"
 
+# Storage
 dj-database-url = "==0.4.2"
 psycopg2 = "~=2.6"
+django-redis-cache = "*"
 
+# Utilities
 faker = "*"
 
+# Deployment
 whitenoise = "~=3.3"
 gunicorn = "~=19.7"
 
 [dev-packages]
 
-django-livereload-server = "*"
-
+# Linters
 pylint = "*"
 pycodestyle = "*"
 pydocstyle = "*"
 
+# Testing
 pytest = "~=3.3"
 pytest-django = "*"
 pytest-describe = "*"
 pytest-expecter = "*"
 pytest-randomly = "*"
 pytest-cov = "*"
-
 freezegun = "*"
 "coverage.space" = "*"
 
+# Tooling
+django-livereload-server = "*"
 honcho = "*"
 splinter = "*"
 fire = "*"
-
 sniffer = "*"
-pync = "*"
+pync = {version = "*", sys_platform = "== 'darwin'"}
+MacFSEvents = {version = "*", sys_platform = "== 'darwin'"}
