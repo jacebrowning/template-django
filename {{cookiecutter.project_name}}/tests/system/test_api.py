@@ -1,14 +1,11 @@
 # pylint: disable=redefined-outer-name,unused-variable,expression-not-assigned
 
-from expecter import expect
-
-
 from . import user
 
 
 def describe_docs():
 
-    def placeholder():
+    def placeholder(expect):
         user.visit("/api/docs")
 
         expect(user.browser.title) == "Swagger UI"
