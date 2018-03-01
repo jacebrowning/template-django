@@ -34,7 +34,10 @@ doctor: ## Check for required system dependencies
 
 # PROJECT DEPENDENCIES ########################################################
 
-BACKEND_DEPENDENCIES := tmp/.pipenv-$(shell bin/checksum Pipfile*)
+export PIPENV_VENV_IN_PROJECT=true
+VENV := .venv
+
+BACKEND_DEPENDENCIES := $(VENV)/.pipenv-$(shell bin/checksum Pipfile*)
 FRONTEND_DEPENDENCIES :=
 
 .PHONY: install
@@ -43,7 +46,6 @@ install: $(BACKEND_DEPENDENCIES) $(FRONTEND_DEPENDENCIES) ## Install project dep
 endif
 
 $(BACKEND_DEPENDENCIES):
-	mkdir -p tmp
 	pipenv install --dev
 	@ touch $@
 
@@ -55,12 +57,11 @@ $(FRONTEND_DEPENDENCIES):
 clean:
 	rm -rf staticfiles
 	rm -rf .coverage htmlcov
-	rm -rf tmp
 
 .PHONY: clean-all
 clean-all: clean
 	# TODO: Delete all frontend files
-	pipenv --rm
+	rm -rf $(VENV)
 
 # RUNTIME DEPENDENCIES ########################################################
 
