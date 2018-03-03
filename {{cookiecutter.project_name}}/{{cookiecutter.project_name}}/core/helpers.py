@@ -1,9 +1,4 @@
-import logging
-
 from django.conf import settings
-
-
-log = logging.getLogger(__name__)
 
 
 def build_url(path):

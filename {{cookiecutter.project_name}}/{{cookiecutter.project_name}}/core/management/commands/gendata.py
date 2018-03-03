@@ -8,6 +8,7 @@ from django.core.management.base import BaseCommand
 from django.db.utils import IntegrityError
 
 from faker import Faker
+import log
 
 # from {{cookiecutter.project_name}}.{{cookiecutter.first_app_name}} import models
 
@@ -83,7 +84,7 @@ class Command(BaseCommand):
                 count += 1
 
         # TODO: Create additional models here
-        print(users)
+        log.debug(users)
 
     def random_user(self, skip=None):
         skip_ids = [self.new_user_id]
