@@ -29,7 +29,7 @@ django-redis-cache = "*"
 
 # Utilities
 faker = "*"
-minilog = "*"
+minilog = "~=0.2.1"
 
 # Deployment
 whitenoise = "~=3.3"

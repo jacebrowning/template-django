@@ -1,10 +1,10 @@
 # pylint: disable=redefined-outer-name,unused-argument
 
 import os
-import logging
 
 import pytest
 from splinter import Browser
+import log
 
 from . import user
 
@@ -15,8 +15,8 @@ HEADLESS = bool(os.getenv('TEST_HEADLESS'))
 
 
 def pytest_configure(config):
-    logging.basicConfig(level=logging.DEBUG)
-    logging.getLogger('selenium').setLevel(logging.WARNING)
+    log.init(debug=True)
+    log.silence('selenium', allow_warning=True)
 
 
 @pytest.yield_fixture(scope='session', autouse=True)
