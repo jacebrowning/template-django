@@ -50,7 +50,7 @@ pytest-expecter = "~=1.1"
 pytest-randomly = "*"
 pytest-cov = "*"
 freezegun = "*"
-"coverage.space" = "*"
+coverage-space = "*"
 
 # Tooling
 django-livereload-server = "*"
