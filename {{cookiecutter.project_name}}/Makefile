@@ -15,7 +15,6 @@ ci: check test ## CI | Run all validation targets
 .PHONY: watch
 watch: install ## CI | Rerun all validation targests in a loop
 	@ rm -rf $(FAILURES)
-	@ pipenv run pip install MacFSEvents > /dev/null
 	$(RUN) sniffer
 
 # SYSTEM DEPENDENCIES #########################################################
