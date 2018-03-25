@@ -13,4 +13,5 @@ BASE_URL = f"https://{BASE_DOMAIN}"
 
 ALLOWED_HOSTS += [
     '.herokuapp.com',
+    # TODO: Add your custom domain
 ]
