@@ -146,7 +146,7 @@ run: .envrc install ## Run the applicaiton
 	$(RUN) honcho start --procfile=Procfile.dev --port=$${PORT:-8000}
 
 .PHONY: run-production
-run-production: .envrc install ## Run the application (simulate production)
+run-production: .envrc install
 	pipenv shell "bin/pre_compile; exit \$$?"
 	pipenv shell "bin/post_compile; exit \$$?"
 	pipenv shell "heroku local release; exit \$$?"
