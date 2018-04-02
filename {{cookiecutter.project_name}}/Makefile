@@ -109,9 +109,9 @@ test-backend: test-backend-all
 
 .PHONY: test-backend-unit
 test-backend-unit: install
-	@- mv $(FAILURES) $(FAILURES).bak
+	@ ( mv $(FAILURES) $(FAILURES).bak || true ) > /dev/null 2>&1
 	$(RUN) py.test $(PYTHON_PACKAGES) tests/unit
-	@- mv $(FAILURES).bak $(FAILURES)
+	@ ( mv $(FAILURES).bak $(FAILURES) || true ) > /dev/null 2>&1
 	$(RUN) coverage.space {{cookiecutter.github_username}}/{{cookiecutter.github_repo}} unit
 
 .PHONY: test-backend-integration
@@ -145,8 +145,8 @@ test-system: install
 run: .envrc install ## Run the applicaiton
 	$(RUN) honcho start --procfile=Procfile.dev --port=$${PORT:-8000}
 
-.PHONY: run-prod
-run-prod: .envrc install ## Run the application (simulate production)
+.PHONY: run-production
+run-production: .envrc install ## Run the application (simulate production)
 	pipenv shell "bin/pre_compile; exit \$$?"
 	pipenv shell "bin/post_compile; exit \$$?"
 	pipenv shell "heroku local release; exit \$$?"
