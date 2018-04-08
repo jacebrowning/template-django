@@ -11,7 +11,7 @@ __pycache__/
 # Test files
 /.coverage
 /htmlcov/
-.cache/
+.*cache/
 
 # Collected static files
 /staticfiles/
