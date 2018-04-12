@@ -1,3 +1,5 @@
+REPOSITORY := {{cookiecutter.github_username}}/{{cookiecutter.github_repo}}
+
 ifdef CIRCLECI
 	RUN := pipenv run
 else ifdef HEROKU_APP_NAME
@@ -112,21 +114,21 @@ test-backend-unit: install
 	@ ( mv $(FAILURES) $(FAILURES).bak || true ) > /dev/null 2>&1
 	$(RUN) py.test $(PYTHON_PACKAGES) tests/unit
 	@ ( mv $(FAILURES).bak $(FAILURES) || true ) > /dev/null 2>&1
-	$(RUN) coverage.space {{cookiecutter.github_username}}/{{cookiecutter.github_repo}} unit
+	$(RUN) coverage.space $(REPOSITORY) unit
 
 .PHONY: test-backend-integration
 test-backend-integration: install
 	@ if test -e $(FAILURES); then $(RUN) py.test tests/integration; fi
 	@ rm -rf $(FAILURES)
 	$(RUN) py.test tests/integration
-	$(RUN) coverage.space {{cookiecutter.github_username}}/{{cookiecutter.github_repo}} integration
+	$(RUN) coverage.space $(REPOSITORY) integration
 
 .PHONY: test-backend-all
 test-backend-all: install
 	@ if test -e $(FAILURES); then $(RUN) py.test $(PYTHON_PACKAGES) tests/integration; fi
 	@ rm -rf $(FAILURES)
 	$(RUN) py.test $(PYTHON_PACKAGES) tests/integration
-	$(RUN) coverage.space {{cookiecutter.github_username}}/{{cookiecutter.github_repo}} overall
+	$(RUN) coverage.space $(REPOSITORY) overall
 
 .PHONY: test-frontend
 test-frontend: test-frontend-unit
