@@ -89,7 +89,7 @@ reset: install ## Database | Create a new database, migrate, and seed it
 # VALIDATION TARGETS ##########################################################
 
 PYTHON_PACKAGES := config {{cookiecutter.project_name}}
-FAILURES := .cache/v/cache/lastfailed
+FAILURES := .pytest_cache/v/cache/lastfailed
 
 .PHONY: check
 check: check-backend ## Run static analysis
