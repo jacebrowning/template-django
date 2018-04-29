@@ -2,9 +2,9 @@
 
 import os
 
+import log
 import pytest
 from splinter import Browser
-import log
 
 from . import user
 

@@ -38,8 +38,8 @@ doctor: ## Check for required system dependencies
 export PIPENV_VENV_IN_PROJECT=true
 VENV := .venv
 
-BACKEND_DEPENDENCIES := $(VENV)/.pipenv-$(shell bin/checksum Pipfile*)
-FRONTEND_DEPENDENCIES :=
+BACKEND_DEPENDENCIES = $(VENV)/.pipenv-$(shell bin/checksum Pipfile*)
+FRONTEND_DEPENDENCIES =
 
 .PHONY: install
 ifndef SKIP_INSTALL
@@ -56,8 +56,8 @@ $(FRONTEND_DEPENDENCIES):
 
 .PHONY: clean
 clean:
-	rm -rf staticfiles
 	rm -rf .coverage htmlcov
+	rm -rf staticfiles
 
 .PHONY: clean-all
 clean-all: clean
@@ -91,11 +91,16 @@ reset: install ## Database | Create a new database, migrate, and seed it
 PYTHON_PACKAGES := config {{cookiecutter.project_name}}
 FAILURES := .cache/v/cache/lastfailed
 
+ifdef DISABLE_COVERAGE
+PYTEST_OPTIONS := --no-cov --disable-warnings
+endif
+
 .PHONY: check
 check: check-backend ## Run static analysis
 
 .PHONY: check-backend
 check-backend: install
+	$(RUN) isort --recursive --apply $(PYTHON_PACKAGES) tests
 	$(RUN) pylint $(PYTHON_PACKAGES) tests --rcfile=.pylint.ini
 	$(RUN) pycodestyle $(PYTHON_PACKAGES) tests --config=.pycodestyle.ini
 
@@ -112,22 +117,22 @@ test-backend: test-backend-all
 .PHONY: test-backend-unit
 test-backend-unit: install
 	@ ( mv $(FAILURES) $(FAILURES).bak || true ) > /dev/null 2>&1
-	$(RUN) pytest $(PYTHON_PACKAGES) tests/unit
+	$(RUN) pytest $(PYTHON_PACKAGES) tests/unit $(PYTEST_OPTIONS)
 	@ ( mv $(FAILURES).bak $(FAILURES) || true ) > /dev/null 2>&1
 	$(RUN) coverage.space $(REPOSITORY) unit
 
 .PHONY: test-backend-integration
 test-backend-integration: install
-	@ if test -e $(FAILURES); then $(RUN) pytest --last-failed tests/integration; fi
+	@ if test -e $(FAILURES); then $(RUN) pytest tests/integration --last-failed; fi
 	@ rm -rf $(FAILURES)
-	$(RUN) pytest tests/integration
+	$(RUN) pytest tests/integration $(PYTEST_OPTIONS)
 	$(RUN) coverage.space $(REPOSITORY) integration
 
 .PHONY: test-backend-all
 test-backend-all: install
-	@ if test -e $(FAILURES); then $(RUN) pytest --last-failed $(PYTHON_PACKAGES) tests/integration; fi
+	@ if test -e $(FAILURES); then $(RUN) pytest $(PYTHON_PACKAGES) tests/integration --last-failed; fi
 	@ rm -rf $(FAILURES)
-	$(RUN) pytest $(PYTHON_PACKAGES) tests/integration
+	$(RUN) pytest $(PYTHON_PACKAGES) tests/integration $(PYTEST_OPTIONS)
 	$(RUN) coverage.space $(REPOSITORY) overall
 
 .PHONY: test-frontend

@@ -1,6 +1,6 @@
 [[source]]
 
-url = "https://pypi.python.org/simple"
+url = "https://pypi.org/simple"
 verify_ssl = true
 name = "pypi"
 
@@ -29,7 +29,7 @@ django-redis-cache = "*"
 
 # Utilities
 faker = "*"
-minilog = "~=0.2.1"
+minilog = "*"
 
 # Deployment
 whitenoise = "~=3.3"
@@ -41,12 +41,13 @@ gunicorn = "~=19.7"
 pylint = "*"
 pycodestyle = "*"
 pydocstyle = "*"
+isort = "*"
 
 # Testing
 pytest = "~=3.3"
 pytest-django = "*"
 pytest-describe = "*"
-pytest-expecter = "~=1.1"
+pytest-expecter = "*"
 pytest-randomly = "*"
 pytest-cov = "*"
 freezegun = "*"
@@ -58,5 +59,5 @@ honcho = "*"
 splinter = "*"
 fire = "*"
 sniffer = "*"
-pync = { version = "<2.0", sys_platform = "== 'darwin'" }
 MacFSEvents = { version = "*", sys_platform = "== 'darwin'" }
+pync = { version = "<2.0", sys_platform = "== 'darwin'" }
