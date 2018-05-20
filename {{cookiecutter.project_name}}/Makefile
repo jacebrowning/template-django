@@ -157,7 +157,7 @@ run-production: .envrc install
 	pipenv shell "bin/pre_compile; exit \$$?"
 	pipenv shell "bin/post_compile; exit \$$?"
 	pipenv shell "heroku local release; exit \$$?"
-	pipenv shell "heroku local web; exit \$$?"
+	pipenv shell "HEROKU_APP_NAME=local heroku local web; exit \$$?"
 
 # RELEASE TARGETS #############################################################
 
