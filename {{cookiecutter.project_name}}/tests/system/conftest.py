@@ -1,10 +1,13 @@
 # pylint: disable=redefined-outer-name,unused-argument
 
 import os
+import time
+from contextlib import suppress
 
 import log
 import pytest
 from splinter import Browser
+from selenium.common.exceptions import WebDriverException
 
 from . import user
 
@@ -24,5 +27,21 @@ def browser():
     with Browser('firefox', headless=HEADLESS) as browser:
         user.browser = browser
         user.site = SITE
-        user.visit("/")
+
+        start = time.time()
+        while site_loading():
+            time.sleep(1)
+            if time.time() - start > 60:
+                raise RuntimeError("Site failed to load")
+        time.sleep(1)
+
         yield browser
+
+
+def site_loading():
+    with suppress(WebDriverException):
+        user.visit("/")
+
+    loaded = user.browser.is_text_present("{{cookiecutter.project_name}}")
+
+    return not loaded
