@@ -12,7 +12,7 @@ from selenium.common.exceptions import WebDriverException
 from . import user
 
 
-PORT = int(os.getenv('TEST_PORT', 8001))
+PORT = int(os.getenv('TEST_PORT', '8001'))
 SITE = os.getenv('TEST_SITE', f"http://localhost:{PORT}")
 HEADLESS = bool(os.getenv('TEST_HEADLESS'))
 
