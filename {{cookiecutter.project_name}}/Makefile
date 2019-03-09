@@ -130,9 +130,9 @@ test-backend-integration: install
 
 .PHONY: test-backend-all
 test-backend-all: install
-	@ if test -e $(FAILURES); then $(RUN) pytest $(PYTHON_PACKAGES) tests/integration --last-failed; fi
+	@ if test -e $(FAILURES); then $(RUN) pytest $(PYTHON_PACKAGES) tests/unit tests/integration --last-failed; fi
 	@ rm -rf $(FAILURES)
-	$(RUN) pytest $(PYTHON_PACKAGES) tests/integration $(PYTEST_OPTIONS)
+	$(RUN) pytest $(PYTHON_PACKAGES) tests/unit tests/integration $(PYTEST_OPTIONS)
 	$(RUN) coverage.space $(REPOSITORY) overall
 
 .PHONY: test-frontend
