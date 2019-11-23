@@ -3,7 +3,7 @@ import urllib
 
 import dj_database_url
 
-from .base import *
+from .default import *
 
 
 BASE_NAME = os.environ['HEROKU_APP_NAME']
