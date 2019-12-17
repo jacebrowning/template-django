@@ -1,0 +1,18 @@
+[tool.poetry]
+
+name = "template-django"
+version = "1.0"
+description = "A template for new Django projects."
+authors = ["Jace Browning <jacebrowning@gmail.com>"]
+
+[tool.poetry.dependencies]
+
+python = "^3.6"
+
+cookiecutter = "*"
+watchdog = "*"
+
+[build-system]
+
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
