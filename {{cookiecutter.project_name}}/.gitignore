@@ -7,11 +7,12 @@ __pycache__/
 
 # Project files
 /.venv/
+*.egg-info/
 
 # Test files
 /.coverage
 /htmlcov/
-.cache/
+.*cache/
 
 # Collected static files
 /staticfiles/

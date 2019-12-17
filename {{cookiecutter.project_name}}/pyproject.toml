@@ -1,0 +1,69 @@
+[tool.poetry]
+
+name = "{{ cookiecutter.project_name }}"
+version = "0.0"
+description = ""
+authors = ["{{ cookiecutter.full_name }} <you@yourdomain.com>"]
+
+[tool.poetry.dependencies]
+
+python = "^3.7"
+
+# Django
+django = "^2.0"
+django-allauth = "*"
+django-cors-headers = "^1.2.0"
+django-grappelli = "*"
+django-memoize = "*"
+
+# API
+djangorestframework = "^3.7"
+drf-nested-routers = "*"
+django-rest-swagger = "*"
+
+# Storage
+dj-database-url = "=0.4.2"
+psycopg2-binary = "^2.6"
+django-redis-cache = "*"
+
+# Utilities
+faker = "*"
+minilog = "*"
+
+# Deployment
+whitenoise = "^3.3"
+gunicorn = "^19.7"
+
+[tool.poetry.dev-dependencies]
+
+# Formatting
+isort = "=4.3.20"
+black = "=19.3b0"
+
+# Linters
+pylint = "^2.4.3"
+mypy = "^0.740"
+
+# Testing
+pytest = "^3.3"
+pytest-django = "*"
+pytest-describe = "*"
+pytest-expecter = "*"
+pytest-randomly = "*"
+pytest-cov = "*"
+freezegun = "*"
+coveragespace = "*"
+
+# Tooling
+django-livereload-server = "*"
+honcho = "*"
+splinter = "*"
+fire = "*"
+sniffer = "*"
+pync = { version = "*", platform = "darwin" }
+MacFSEvents = { version = "*", platform = "darwin" }
+
+[tool.black]
+
+target-version = ['py37']
+skip-string-normalization = true

@@ -5,9 +5,8 @@ jobs:
     working_directory: ~/{{cookiecutter.project_name}}
 
     docker:
-      - image: maketested/python-node:latest
+      - image: circleci/python:3.7.5-stretch-node-browsers
         environment:
-          PIPENV_VENV_IN_PROJECT: true
           DATABASE_URL: postgres://circleci:@127.0.0.1:5432/{{cookiecutter.project_name}}_test
           REDIS_URL: redis://127.0.0.1:6379/0
       - image: circleci/postgres:9.6-alpine-ram
@@ -20,35 +19,35 @@ jobs:
       - checkout
 
       - run:
-          name: Checking system dependencies
+          name: Checking System Dependencies
           command: make doctor
 
       - type: cache-restore
-        key: pipenv-{% raw %}{{ checksum "Pipfile.lock" }}{% endraw %}
+        key: poetry-{% raw %}{{ checksum "poetry.lock" }}{% endraw %}
 
       - run:
-          name: Installing project dependencies
+          name: Installing Project Dependencies
           command: make install
 
       - type: cache-save
-        key: pipenv-{% raw %}{{ checksum "Pipfile.lock" }}{% endraw %}
+        key: poetry-{% raw %}{{ checksum "poetry.lock" }}{% endraw %}
         paths:
           - .venv
 
       - run:
-          name: Checking backend code
+          name: Checking Backend Code
           command: make check-backend
 
       - run:
-          name: Running backend tests
+          name: Running Backend Tests
           command: make test-backend
 
       - run:
-          name: Running frontend tests
+          name: Running Frontend Tests
           command: make test-frontend
 
       - run:
-          name: Running end-to-end tests
+          name: Running System Tests
           command: make build data test-system
           environment:
             DJANGO_SETTINGS_MODULE: config.settings.staging

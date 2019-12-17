@@ -1,15 +1,15 @@
 language: python
 python:
-  - 3.6
+  - 3.7
 
-cache: pip
-
-env:
-  global:
-  - PIPENV_IGNORE_VIRTUALENVS=true
+cache:
+  pip: true
+  directories:
+    - ${VIRTUAL_ENV}
 
 before_install:
-  - pip install pipenv
+  - curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | python
+  - source $HOME/.poetry/env
 
 install:
   - make install
@@ -35,7 +35,7 @@ after_script: >
 
     # Rebuild the repository from the generated files and push to GitHub
     cd demo_project ;
-    pipenv lock;
+    poetry lock;
     git add --all ;
     git commit -m "Deploy Travis CI build $TRAVIS_BUILD_NUMBER to GitHub" ;
     git push -f https://${GH_TOKEN}@github.com/jacebrowning/template-django-demo master ;
