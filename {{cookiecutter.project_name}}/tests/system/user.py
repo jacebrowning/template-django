@@ -1,8 +1,9 @@
 import time
+from splinter import Browser
 
 
-site = None
-browser = None
+site: str = ''
+browser: Browser = None
 
 
 def visit(path):
