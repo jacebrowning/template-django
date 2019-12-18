@@ -7,7 +7,7 @@ authors = ["{{ cookiecutter.full_name }} <you@yourdomain.com>"]
 
 [tool.poetry.dependencies]
 
-python = "^3.7"
+python = "^3.8"
 
 # Django
 django = "^2.0"
