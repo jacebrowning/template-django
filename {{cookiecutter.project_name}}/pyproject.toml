@@ -10,9 +10,9 @@ authors = ["{{ cookiecutter.full_name }} <you@yourdomain.com>"]
 python = "^3.8"
 
 # Django
-django = "^2.0"
+django = "^3.0"
 django-allauth = "*"
-django-cors-headers = "^1.2.0"
+django-cors-headers = "*"
 django-grappelli = "*"
 django-memoize = "*"
 
@@ -31,7 +31,7 @@ faker = "*"
 minilog = "*"
 
 # Deployment
-whitenoise = "^3.3"
+whitenoise = "^5.0.1"
 gunicorn = "^19.7"
 
 [tool.poetry.dev-dependencies]
