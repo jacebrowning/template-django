@@ -216,8 +216,8 @@ python-versions = "*"
 version = "0.6.1"
 
 [metadata]
-content-hash = "cb333e468b47b487011a17cbccd8fa9a08c4103713314c4146322ea1dc27e8c6"
-python-versions = "^3.6"
+content-hash = "2d48cf9c42becf12b0acbd31755fbd1d4bbbcec991fcb592a880ca00fab7b352"
+python-versions = "^3.8"
 
 [metadata.files]
 argh = [

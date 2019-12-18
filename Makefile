@@ -16,7 +16,16 @@ ci: build
 watch: install
 	rm -rf $(OUTPUT)/*
 	@ sleep 2 && touch $(INPUT)/poetry.lock &
-	poetry run watchmedo shell-command --command="clear; make ci" --recursive --wait $(INPUT)
+	poetry run watchmedo shell-command --command="make .watch" --recursive --wait $(INPUT)
+
+.PHONY: .watch
+.watch:
+	@ echo
+	@ echo "Genereating and testing the demo project..."
+	@ echo
+	@ make ci
+	@ echo
+	@ echo "All tests passed."
 
 # DEPENDENCIES ################################################################
 
