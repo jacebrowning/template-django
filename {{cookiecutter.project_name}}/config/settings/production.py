@@ -16,9 +16,9 @@ BASE_URL = f"https://{BASE_DOMAIN}"
 SECRET_KEY = os.environ['SECRET_KEY']
 
 ALLOWED_HOSTS = [
+    '0.0.0.0',
     'localhost',
-    # TODO: Remove this line and add your custom domain
-    '.herokuapp.com',
+    '.herokuapp.com',  # TODO: Remove this line and add your custom domain
 ]
 
 ###############################################################################
