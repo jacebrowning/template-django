@@ -48,6 +48,7 @@ endif
 $(BACKEND_DEPENDENCIES): poetry.lock runtime.txt requirements.txt
 	@ poetry config virtualenvs.in-project true
 	poetry install
+	@ mkdir -p staticfiles
 	@ touch $@
 
 ifndef CI

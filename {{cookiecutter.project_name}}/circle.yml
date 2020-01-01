@@ -40,7 +40,7 @@ jobs:
 
       - run:
           name: Running Backend Tests
-          command: make test-backend
+          command: make test-backend && sudo pip install coveralls && coveralls
 
       - run:
           name: Running Frontend Tests
@@ -53,3 +53,6 @@ jobs:
             DJANGO_SETTINGS_MODULE: config.settings.staging
             HEROKU_APP_NAME: {{cookiecutter.project_name}}-staging
             SECRET_KEY: staging
+
+      - store_artifacts:
+          path: htmlcov
