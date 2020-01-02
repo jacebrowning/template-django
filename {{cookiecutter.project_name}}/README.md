@@ -1,5 +1,5 @@
-[![CircleCI](https://img.shields.io/circleci/build/github/{{cookiecutter.github_username}}/{{cookiecutter.github_repo}})](https://coveralls.io/github/{{cookiecutter.github_username}}/{{cookiecutter.github_repo}})
-[![Coveralls](https://img.shields.io/coveralls/github/{{cookiecutter.github_username}}/{{cookiecutter.github_repo}})](https://circleci.com/gh/{{cookiecutter.github_username}}/{{cookiecutter.github_repo}}/tree/master)
+[![CircleCI](https://img.shields.io/circleci/build/github/{{cookiecutter.github_username}}/{{cookiecutter.github_repo}})](https://circleci.com/gh/{{cookiecutter.github_username}}/{{cookiecutter.github_repo}}/tree/master)
+[![Coveralls](https://img.shields.io/coveralls/github/{{cookiecutter.github_username}}/{{cookiecutter.github_repo}})](https://coveralls.io/github/{{cookiecutter.github_username}}/{{cookiecutter.github_repo}})
 
 # Overview
 
