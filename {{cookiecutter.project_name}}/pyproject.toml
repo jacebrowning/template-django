@@ -19,7 +19,7 @@ django-memoize = "*"
 # API
 djangorestframework = "^3.7"
 drf-nested-routers = "*"
-django-rest-swagger = "*"
+drf-yasg = "*"
 
 # Storage
 dj-database-url = "=0.4.2"

@@ -8,7 +8,8 @@
     * Windows: http://mingw.org/download/installer
     * Mac: http://developer.apple.com/xcode
     * Linux: http://www.gnu.org/software/make
-* pipenv: http://docs.pipenv.org
+* Python: `$ pyenv install`
+* Poetry: https://python-poetry.org/docs/#installation
 
 To confirm these system dependencies are configured correctly:
 
