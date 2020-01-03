@@ -25,7 +25,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'memoize',
     'rest_framework',
-    'rest_framework_swagger',
+    'drf_yasg',
 
     '{{cookiecutter.project_name}}.api',
     '{{cookiecutter.project_name}}.core',
