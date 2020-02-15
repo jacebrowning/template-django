@@ -28,7 +28,7 @@ django-redis-cache = "*"
 
 # Utilities
 faker = "*"
-minilog = "*"
+minilog = "^1.4"
 
 # Deployment
 whitenoise = "^5.0.1"
@@ -37,23 +37,23 @@ gunicorn = "^20.0.4"
 [tool.poetry.dev-dependencies]
 
 # Formatting
-isort = "=4.3.20"
-black = "=19.3b0"
+isort = "=4.3.21"
+black = "=19.10b0"
 
 # Linters
 pylint = "^2.4.3"
-mypy = "^0.740"
+mypy = "^0.761"
 
 # Testing
 pytest = "^5.3.2"
 pytest-django = "*"
 pytest-describe = "*"
-pytest-expecter = "*"
+pytest-expecter = "^2.0"
 pytest-randomly = "*"
 pytest-cov = "^2.8.0"
 freezegun = "*"
 coverage = "^5.0"
-coveragespace = "^3.0.1"
+coveragespace = "^3.1.1"
 
 # Tooling
 django-livereload-server = "*"
