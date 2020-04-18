@@ -14,7 +14,6 @@ django = "^3.0"
 django-allauth = "*"
 django-cors-headers = "*"
 django-grappelli = "*"
-django-memoize = "*"
 
 # API
 djangorestframework = "^3.7"
