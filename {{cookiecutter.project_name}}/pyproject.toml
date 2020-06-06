@@ -21,13 +21,13 @@ drf-nested-routers = "*"
 drf-yasg = "*"
 
 # Storage
-dj-database-url = "=0.4.2"
+dj-database-url = "0.4.2"
 psycopg2-binary = "^2.6"
 django-redis-cache = "*"
 
 # Utilities
 faker = "*"
-minilog = "^1.4"
+minilog = "^1.6"
 
 # Deployment
 whitenoise = "^5.0.1"
@@ -36,8 +36,8 @@ gunicorn = "^20.0.4"
 [tool.poetry.dev-dependencies]
 
 # Formatting
-isort = "=4.3.21"
-black = "=19.10b0"
+isort = "4.3.21"
+black = "19.10b0"
 
 # Linters
 pylint = "^2.4.3"
@@ -46,7 +46,7 @@ mypy = "^0.761"
 # Testing
 pytest = "^5.3.2"
 pytest-django = "*"
-pytest-describe = "*"
+pytest-describe = "^1.0"
 pytest-expecter = "^2.0"
 pytest-randomly = "*"
 pytest-cov = "^2.8.0"
