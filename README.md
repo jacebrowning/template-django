@@ -28,9 +28,7 @@ $ pip install cookiecutter
 $ cookiecutter gh:jacebrowning/template-django -f
 ```
 
-Cookiecutter will ask you for some basic info (your name, project name, first app name, etc.) and generate a base Django project for you.
-
-Once created, run the code formatter to updates files based on your chosen names:
+Cookiecutter will ask you for some basic info (your name, project name, first app name, etc.) and generate a base Django project for you. Once created, run the code formatter to updates files based on your chosen names:
 
 ```
 $ cd <github_repo>
