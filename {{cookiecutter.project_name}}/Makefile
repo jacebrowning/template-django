@@ -118,7 +118,7 @@ check-frontend: install
 	# TODO: Run frontend linters if applicable
 
 format-backend: install
-	$(RUN) isort $(PYTHON_PACKAGES) tests --recursive --apply
+	$(RUN) isort $(PYTHON_PACKAGES) tests
 	$(RUN) black $(PYTHON_PACKAGES) tests
 
 .PHONY: test
