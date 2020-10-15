@@ -16,7 +16,7 @@ django-cors-headers = "*"
 django-grappelli = "*"
 
 # API
-djangorestframework = "^3.7"
+djangorestframework = "~3.11"
 drf-nested-routers = "*"
 drf-yasg = "*"
 
