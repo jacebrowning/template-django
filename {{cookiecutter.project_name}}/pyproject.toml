@@ -23,7 +23,7 @@ drf-yasg = "*"
 # Storage
 dj-database-url = "~0.4.2"
 psycopg2-binary = "^2.6"
-django-redis-cache = "*"
+django-redis = "^4.12.1"
 
 # Utilities
 faker = "*"
