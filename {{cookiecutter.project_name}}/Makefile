@@ -53,7 +53,7 @@ $(BACKEND_DEPENDENCIES): poetry.lock runtime.txt requirements.txt
 
 ifndef CI
 poetry.lock: pyproject.toml
-	poetry lock
+	poetry lock --no-update
 	@ touch $@
 runtime.txt: .python-version
 	echo "python-$(shell cat $<)" > $@
