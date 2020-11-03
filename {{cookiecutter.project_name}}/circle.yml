@@ -19,14 +19,14 @@ jobs:
       - checkout
 
       - run:
-          name: Checking System Dependencies
+          name: Checking system dependencies
           command: make doctor
 
       - type: cache-restore
         key: poetry-{% raw %}{{ checksum "poetry.lock" }}{% endraw %}
 
       - run:
-          name: Installing Project Dependencies
+          name: Installing project dependencies
           command: make install
 
       - type: cache-save
@@ -35,19 +35,19 @@ jobs:
           - .venv
 
       - run:
-          name: Checking Backend Code
+          name: Checking backend code
           command: make check-backend
 
       - run:
-          name: Running Backend Tests
+          name: Running backend tests
           command: make test-backend && sudo pip install coveralls && coveralls
 
       - run:
-          name: Running Frontend Tests
+          name: Running frontend tests
           command: make test-frontend
 
       - run:
-          name: Running System Tests
+          name: Running system tests
           command: make build data test-system
           environment:
             DJANGO_SETTINGS_MODULE: config.settings.staging
