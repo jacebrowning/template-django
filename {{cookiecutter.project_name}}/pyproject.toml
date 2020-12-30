@@ -27,7 +27,7 @@ django-redis = "^4.12.1"
 
 # Utilities
 faker = "*"
-minilog = "^1.6"
+minilog = "^2.0"
 
 # Deployment
 whitenoise = "^5.0.1"
@@ -52,7 +52,7 @@ pytest-randomly = "*"
 pytest-cov = "^2.8.0"
 freezegun = "*"
 coverage = "^5.0"
-coveragespace = "^3.1.1"
+coveragespace = "=4.0b1"
 
 # Tooling
 django-livereload-server = "*"

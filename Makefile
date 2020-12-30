@@ -10,7 +10,7 @@ all: install
 
 .PHONY: ci
 ci: build
-	make ci -C $(OUTPUT)
+	make ci -C $(OUTPUT) CI=true
 
 .PHONY: watch
 watch: install
