@@ -11,6 +11,8 @@ python = "^3.8"
 
 cookiecutter = "*"
 watchdog = "*"
+pyyaml = "*" # missing dependency for 'watchdog'
+argh = "*" # missing dependency for 'watchdog'
 
 [build-system]
 
