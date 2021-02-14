@@ -15,7 +15,7 @@ ci: build
 .PHONY: watch
 watch: install
 	rm -rf $(OUTPUT)/*
-	@ sleep 2 && touch $(INPUT)/poetry.lock &
+	@ sleep 2 && touch $(INPUT)/pyproject.toml &
 	poetry run watchmedo shell-command --command="make .watch" --recursive --wait $(INPUT)
 
 .PHONY: .watch
