@@ -56,7 +56,7 @@ coveragespace = "^4.0"
 
 # Tooling
 django-livereload-server = "*"
-honcho = "*"
+honcho = { git = "https://github.com/nickstenning/honcho", rev = "b4de1aa0504d41c0f05efbb04f63c624fccded81" }
 splinter = "*"
 fire = "*"
 sniffer = "*"
