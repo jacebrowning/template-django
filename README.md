@@ -2,7 +2,7 @@
 
 This is a [cookiecutter](https://github.com/audreyr/cookiecutter) template for a typical Django application following modern packaging conventions. It utilizes popular libraries alongside Make and pipenv to fully automate all development and deployment tasks. Check out the live demo: [jacebrowning/template-django-demo](https://github.com/jacebrowning/template-django-demo)
 
-[![Build Status](https://img.shields.io/travis/jacebrowning/template-django.svg)](https://travis-ci.org/jacebrowning/template-django)
+[![Build Status](https://img.shields.io/travis/com/jacebrowning/template-django.svg)](https://travis-ci.com/jacebrowning/template-django)
 ## Features
 
 * Settings broken out into local, staging, and production
