@@ -10,7 +10,7 @@ authors = ["{{ cookiecutter.full_name }} <you@yourdomain.com>"]
 python = "^3.8"
 
 # Django
-django = "^3.0"
+django = "^3.1.9"
 django-allauth = "*"
 django-cors-headers = "*"
 django-grappelli = "*"
