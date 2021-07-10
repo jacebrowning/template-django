@@ -54,15 +54,19 @@ freezegun = "*"
 coverage = "^5.0"
 coveragespace = "^4.0"
 
-# Tooling
+# Server
 django-livereload-server = "*"
 honcho = { git = "https://github.com/nickstenning/honcho", rev = "b4de1aa0504d41c0f05efbb04f63c624fccded81" }
-splinter = "*"
-fire = "*"
-sniffer = "*"
-pync = { version = "*", platform = "darwin" }
-MacFSEvents = { version = "*", platform = "darwin" }
 
+# E2E
+fire = "*"
+splinter = "*"
+
+# Tooling
+ipython = "*"
+MacFSEvents = { version = "*", platform = "darwin" }
+pync = { version = "*", platform = "darwin" }
+sniffer = "*"
 [tool.black]
 
 target-version = ['py37']
