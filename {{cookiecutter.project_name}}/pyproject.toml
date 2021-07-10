@@ -67,6 +67,7 @@ ipython = "*"
 MacFSEvents = { version = "*", platform = "darwin" }
 pync = { version = "*", platform = "darwin" }
 sniffer = "*"
+
 [tool.black]
 
 target-version = ['py37']
