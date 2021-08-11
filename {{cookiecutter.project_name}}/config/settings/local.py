@@ -34,6 +34,8 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': '{{cookiecutter.project_name}}_dev',
         'HOST': '127.0.0.1',
-    },
-    'remote': dj_database_url.config(),
+    }
 }
+
+if "DATABASE_URL" in os.environ:
+    DATABASES["default"] = dj_database_url.config()
