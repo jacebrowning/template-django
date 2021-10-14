@@ -60,7 +60,8 @@ honcho = { git = "https://github.com/nickstenning/honcho", rev = "b4de1aa0504d41
 
 # E2E
 fire = "*"
-splinter = "*"
+splinter = "~0.15.0"
+selenium = "<4" # https://github.com/cobrateam/splinter/issues/929
 
 # Tooling
 ipython = "*"
