@@ -14,8 +14,8 @@ This project was generated with [cookiecutter](https://github.com/audreyr/cookie
 The following must be installed on your system:
 
 - Make
-- Python 3.6
-- pipenv
+- Python
+- Poetry
 - PostgreSQL
 
 To confirm the correct versions are installed:
