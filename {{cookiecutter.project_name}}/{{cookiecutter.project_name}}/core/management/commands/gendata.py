@@ -52,10 +52,10 @@ class Command(BaseCommand):
                 email=f"{username}@{settings.BASE_DOMAIN}",
                 password=password,
             )
-            self.stdout.write(f"Created new superuser: {user}")
+            self.stdout.write(f"Created superuser: {user}")
         except IntegrityError:
             user = User.objects.get(username=username)
-            self.stdout.write(f"Found existing superuser: {user}")
+            self.stdout.write(f"Found superuser: {user}")
 
         return user
 
@@ -68,9 +68,9 @@ class Command(BaseCommand):
         user.save()
 
         if created:
-            self.stdout.write(f"Created new user: {user}")
+            self.stdout.write(f"Created user: {user}")
         else:
-            self.stdout.write(f"Update user: {user}")
+            self.stdout.write(f"Updated user: {user}")
 
         return user
 
