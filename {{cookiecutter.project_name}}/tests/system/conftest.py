@@ -18,7 +18,7 @@ HEADLESS = bool(os.getenv('TEST_HEADLESS'))
 
 
 def pytest_configure(config):
-    log.init(debug=True)
+    log.init()
     log.silence('selenium', allow_warning=True)
 
 
