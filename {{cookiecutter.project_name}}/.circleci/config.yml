@@ -5,7 +5,7 @@ jobs:
     working_directory: ~/{{cookiecutter.project_name}}
 
     docker:
-      - image: circleci/python:3.8-node-browsers
+      - image: circleci/python:3.9-node-browsers
         environment:
           DATABASE_URL: postgres://circleci:@127.0.0.1:5432/{{cookiecutter.project_name}}_test
           REDIS_URL: redis://127.0.0.1:6379/0
