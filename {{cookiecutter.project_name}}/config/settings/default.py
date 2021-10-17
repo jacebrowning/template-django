@@ -1,5 +1,6 @@
 import os
 
+import grappelli
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CONFIG_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -131,3 +132,5 @@ CORS_ORIGIN_ALLOW_ALL = True
 # Grappelli
 
 GRAPPELLI_ADMIN_TITLE = "{{cookiecutter.project_name}} Admin"
+
+del grappelli.default_app_config  # fixes RemovedInDjango41Warning
