@@ -63,7 +63,10 @@ class Command(BaseCommand):
         username, email_domain = base_email.split('@')
 
         user, created = User.objects.get_or_create(username=username)
-        user.email = f"{username}+{settings.BASE_NAME}@{email_domain}"
+        if email_domain == "example.com":
+            user.email = base_email
+        else:
+            user.email = f"{username}+{settings.BASE_NAME}@{email_domain}"
         user.set_password(password)
         user.save()
 
