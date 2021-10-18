@@ -6,6 +6,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CONFIG_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PROJECT_ROOT = os.path.dirname(CONFIG_ROOT)
 
+ALLOW_DEBUG = False
+
 ###############################################################################
 # Core
 
@@ -20,6 +22,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.staticfiles',
+    "debug_toolbar",
 
     'allauth',
     'allauth.account',
@@ -43,6 +46,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -50,7 +54,7 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        "DIRS": ["templates", os.path.join(PROJECT_ROOT, "{{cookiecutter.project_name}}", "templates")], 
+        "DIRS": ["templates", os.path.join(PROJECT_ROOT, "{{cookiecutter.project_name}}", "templates")],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -134,3 +138,11 @@ CORS_ORIGIN_ALLOW_ALL = True
 GRAPPELLI_ADMIN_TITLE = "{{cookiecutter.project_name}} Admin"
 
 del grappelli.default_app_config  # fixes RemovedInDjango41Warning
+
+###############################################################################
+# Django Debug Toolbar
+
+DEBUG_TOOLBAR_CONFIG = {
+    "SHOW_COLLAPSED": True,
+    "SHOW_TOOLBAR_CALLBACK": "{{cookiecutter.project_name}}.core.helpers.allow_debug",
+}

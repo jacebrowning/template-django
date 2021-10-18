@@ -13,6 +13,7 @@ python = "^3.9"
 django = "^3.2.8"
 django-allauth = "*"
 django-cors-headers = "*"
+django-debug-toolbar = "^3.2.2"
 django-grappelli = "*"
 
 # API
