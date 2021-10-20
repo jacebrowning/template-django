@@ -33,3 +33,4 @@ class CustomUser:
 for _name in dir(CustomUser):
     if not _name.startswith("_"):
         method = getattr(CustomUser, _name)
+        User.add_to_class(_name, method)
