@@ -47,7 +47,7 @@ mypy = "~0.790"
 # Testing
 pytest = "^6.2.5"
 pytest-django = "*"
-pytest-describe = "^1.0"
+pytest-describe = "^2.0"
 pytest-expecter = "^2.0"
 pytest-randomly = "*"
 pytest-cov = "^2.8.0"
