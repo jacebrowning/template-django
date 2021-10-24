@@ -1,6 +1,6 @@
 # Jace's Django Template
 
-This is a [cookiecutter](https://github.com/audreyr/cookiecutter) template for a typical Django application following modern packaging conventions. It utilizes popular libraries alongside Make and pipenv to fully automate all development and deployment tasks. Check out the live demo: [jacebrowning/template-django-demo](https://github.com/jacebrowning/template-django-demo)
+This is a [cookiecutter](https://github.com/audreyr/cookiecutter) template for a typical Django project following modern packaging conventions. It utilizes popular libraries alongside Make and Poetry to fully automate all development and deployment tasks. Check out the live demo: [jacebrowning/template-django-demo](https://github.com/jacebrowning/template-django-demo)
 
 [![Build Status](https://img.shields.io/travis/com/jacebrowning/template-django.svg)](https://app.travis-ci.com/github/jacebrowning/template-django)
 ## Features
@@ -10,10 +10,10 @@ This is a [cookiecutter](https://github.com/audreyr/cookiecutter) template for a
 * Unit and integration testing using `pytest`, `pytest-describe`, and `pytest-expecter`
 * End-to-end testing using [Splinter](https://splinter.readthedocs.io/)
 * `Makefile` for automating common development tasks:
-    - Installing dependencies into a virtual environment using `pipenv`
+    - Installing dependencies into a virtual environment using `poety`
     - Generate superuser and other fixtures to seed the database
     - Running tests against the backend and frontend
-    - Running style checkers (`pycodestyle`/`pydocstyle`) and linters (`pylint`)
+    - Running type checks (`mypy`) and linters (`pylint`)
 * Continuous Integration via [CircleCI](https://circleci.com/docs/2.0/)
 * Continuous Delivery via [Heroku](https://www.heroku.com/flow)
 
