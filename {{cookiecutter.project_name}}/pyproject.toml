@@ -3,7 +3,9 @@
 name = "{{ cookiecutter.project_name }}"
 version = "0.0"
 description = ""
+
 authors = ["{{ cookiecutter.full_name }} <you@yourdomain.com>"]
+license = "Unlicensed"
 
 [tool.poetry.dependencies]
 
