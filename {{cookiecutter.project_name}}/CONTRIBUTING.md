@@ -8,12 +8,12 @@
     * Windows: http://mingw.org/download/installer
     * Mac: http://developer.apple.com/xcode
     * Linux: http://www.gnu.org/software/make
-* Python: `$ pyenv install`
+* Python: `$ pyenv install` or `$ asdf install`
 * Poetry: https://python-poetry.org/docs/#installation
 
 To confirm these system dependencies are configured correctly:
 
-```sh
+```
 $ make doctor
 ```
 
@@ -21,7 +21,7 @@ $ make doctor
 
 Install project dependencies into a virtual environment:
 
-```sh
+```
 $ make install
 ```
 
@@ -31,34 +31,30 @@ $ make install
 
 Manually run the tests:
 
-```sh
+```
 $ make test
 ```
 
 or keep them running on change:
 
-```sh
+```
 $ make watch
 ```
 
 > In order to have OS X notifications, `brew install terminal-notifier`.
 
-
 ### Static Analysis
 
 Run linters and static analyzers:
 
-```sh
-$ make pylint
-$ make pycodestyle
-$ make pydocstyle
-$ make check  # includes all checks
+```
+$ make check
 ```
 
 ## Continuous Integration
 
 The CI server will report overall build status:
 
-```sh
+```
 $ make ci
 ```
