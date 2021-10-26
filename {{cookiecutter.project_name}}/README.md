@@ -52,19 +52,4 @@ Run the application and recompile static files:
 $ make run
 ```
 
-Continuously run validation targets:
-
-```
-$ make watch
-```
-
-or run them individually:
-
-```
-$ make check-backend
-$ make check-frontend
-$ make test-backend-unit
-$ make test-backend-integration
-$ make test-frontend-unit
-$ make test-system
-```
+See the [contributor guide](CONTRIBUTING.md) for additional details.
