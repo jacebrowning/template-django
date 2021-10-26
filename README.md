@@ -35,6 +35,18 @@ $ cd <github_repo>
 $ make format
 ```
 
+## Deploying
+
+This template builds projects intended to be deployed on Heroku.
+You'll need to set the following environment variables in all environments:
+
+| Name | Value | Purpose |
+| --- | --- | --- |
+| `DISABLE_COLLECTSTATIC` | `true` | Disable automatic static files collection since `bin/post_compile` already does that |
+| `HEROKU_APP_NAME` | `[staging-]<domain>` | Infer the domain name for staging and production |
+| `SECRET_KEY` | `<generated>` | Securely encrypt passwords in the database |
+
+
 ## Updates
 
 Checkout the appropriate branch of [template-django-demo](https://github.com/jacebrowning/template-django-demo) and manually merge changes into your project.
