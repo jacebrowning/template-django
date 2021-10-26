@@ -44,8 +44,9 @@ You'll need to set the following environment variables in all environments:
 | --- | --- | --- |
 | `DISABLE_COLLECTSTATIC` | `true` | Disable automatic static files collection since `bin/post_compile` already does that |
 | `HEROKU_APP_NAME` | `[staging-]<domain>` | Infer the domain name for staging and production |
+| `DJANGO_SETTINGS_MODULE` | `config.settings.[staging]` | Specify which Django settings to use for the application |
 | `SECRET_KEY` | `<generated>` | Securely encrypt passwords in the database |
-
+| `DATABASE_URL` | `postgres://USER:PASSWORD@HOST:PORT/NAME` | Specify the database URL for the application to use, following the schema used by [dj_database_url](https://github.com/kennethreitz/dj-database-url#url-schema) |
 
 ## Updates
 
