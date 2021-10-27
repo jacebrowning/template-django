@@ -1,4 +1,4 @@
-from django.conf.urls import include, url
+from django.urls import include, path
 from django.conf import settings
 
 from rest_framework import routers
@@ -28,9 +28,9 @@ schema_view = get_schema_view(
 )
 
 urlpatterns = [
-    url('^', include(root.urls)),
+    path('', include(root.urls)),
 
-    url('^client/', include('rest_framework.urls')),
+    path('client/', include('rest_framework.urls')),
 
-    url('^docs/', schema_view.with_ui('swagger')),
+    path('docs/', schema_view.with_ui('swagger')),
 ]

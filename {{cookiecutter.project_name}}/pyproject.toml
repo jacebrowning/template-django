@@ -19,7 +19,7 @@ django-debug-toolbar = "^3.2.2"
 django-grappelli = "*"
 
 # API
-djangorestframework = "~3.11"
+djangorestframework = "~3.12.4"
 drf-nested-routers = "*"
 drf-yasg = "*"
 
