@@ -2,7 +2,7 @@ import random
 from contextlib import suppress
 
 from django.conf import settings
-from django.contrib.auth import get_user_model
+from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
 from django.core.management.base import BaseCommand
 from django.db.utils import IntegrityError
@@ -12,9 +12,6 @@ from faker import Faker
 
 
 # from {{cookiecutter.project_name}}.{{cookiecutter.first_app_name}} import models
-
-
-User = get_user_model()
 
 
 class Command(BaseCommand):
@@ -47,7 +44,7 @@ class Command(BaseCommand):
 
     def get_or_create_superuser(self, username="admin", password="password"):
         try:
-            user = User.objects.create_superuser(
+            user = User.objects.create_superuser(  # type: ignore
                 username=username,
                 email=f"{username}@{settings.BASE_DOMAIN}",
                 password=password,
@@ -94,7 +91,8 @@ class Command(BaseCommand):
         skip_ids = [self.new_user_id]
         if skip:
             skip_ids.append(skip.id)
-        return random.choice(User.objects.exclude(id__in=skip_ids))
+        users = User.objects.exclude(id__in=skip_ids)
+        return random.choice(users)  # type: ignore
 
     def fake_username(self):
         return self.fake.name().replace(' ', '').lower()

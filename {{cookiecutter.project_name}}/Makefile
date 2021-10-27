@@ -109,7 +109,7 @@ format: format-backend
 
 .PHONY: check-backend
 check-backend: install format-backend
-	$(RUN) mypy $(PYTHON_PACKAGES) tests --config-file=.mypy.ini
+	$(RUN) mypy $(PYTHON_PACKAGES) tests
 	$(RUN) pylint $(PYTHON_PACKAGES) tests --rcfile=.pylint.ini
 
 .PHONY: check-frontend

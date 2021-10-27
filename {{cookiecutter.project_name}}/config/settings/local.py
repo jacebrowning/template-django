@@ -1,3 +1,5 @@
+# mypy: ignore-errors
+
 import dj_database_url
 
 from .default import *
