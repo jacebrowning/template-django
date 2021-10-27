@@ -10,6 +10,8 @@
     * Linux: http://www.gnu.org/software/make
 * Python: `$ pyenv install` or `$ asdf install`
 * Poetry: https://python-poetry.org/docs/#installation
+* PostgreSQL: `$ brew install postgres`
+* direnv: https://direnv.net/
 
 To confirm these system dependencies are configured correctly:
 
@@ -23,6 +25,14 @@ Install project dependencies into a virtual environment:
 
 ```
 $ make install
+```
+
+### Data
+
+To automatically create test accounts, update `.envrc` with your own information and run `direnv allow`. Then, generate new seed data for local development:
+
+```
+$ make data
 ```
 
 ## Development Tasks
