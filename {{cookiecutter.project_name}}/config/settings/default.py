@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'corsheaders',
+    'django_extensions',
     'rest_framework',
     'drf_yasg',
 
