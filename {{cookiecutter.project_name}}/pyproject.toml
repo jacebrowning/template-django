@@ -16,6 +16,7 @@ django = "^3.2.8"
 django-allauth = "*"
 django-cors-headers = "*"
 django-debug-toolbar = "^3.2.2"
+django-extensions = "*"
 django-grappelli = "*"
 
 # API
@@ -62,7 +63,6 @@ coverage = "^5.0"
 coveragespace = "^4.0"
 
 # Server
-django-extensions = "*"
 django-livereload-server = "*"
 honcho = "^1.1"
 
