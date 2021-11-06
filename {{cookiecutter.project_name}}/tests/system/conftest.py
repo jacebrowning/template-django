@@ -22,7 +22,7 @@ def pytest_configure(config):
     log.silence('selenium', allow_warning=True)
 
 
-@pytest.yield_fixture(scope='session', autouse=True)
+@pytest.fixture(scope='session', autouse=True)
 def browser():
     with Browser('firefox', headless=HEADLESS) as browser:
         user.browser = browser
