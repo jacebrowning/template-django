@@ -189,8 +189,11 @@ build: install
 
 .PHONY: promote
 promote: install
+	@ echo
 	TEST_SITE=https://staging.{{cookiecutter.project_name}}.com $(RUN) pytest tests/system --cache-clear
+	@ echo
 	heroku pipelines:promote --app {{cookiecutter.project_name}}-staging --to {{cookiecutter.project_name}}
+	@ echo
 	TEST_SITE=https://{{cookiecutter.project_name}}.com $(RUN) pytest tests/system
 
 # HELP ########################################################################
