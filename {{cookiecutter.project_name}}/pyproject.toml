@@ -9,25 +9,25 @@ license = "Unlicensed"
 
 [tool.poetry.dependencies]
 
-python = "^3.9"
+python = "~3.9"
 
 # Django
-django = "^3.2.8"
+django = "~4.0"
 django-allauth = "*"
 django-cors-headers = "*"
 django-debug-toolbar = "^3.2.2"
 django-extensions = "*"
-django-grappelli = "*"
 
 # API
 djangorestframework = "~3.12.4"
+pytz = "*" # required by 'djangorestframework' until it supports Django 4.x
 drf-nested-routers = "*"
 drf-yasg = "*"
 
 # Storage
 dj-database-url = "~0.4.2"
 psycopg2-binary = "^2.9.1"
-django-redis = "^4.12.1"
+redis = "^4.0.2"
 
 # Utilities
 faker = "*"
@@ -36,7 +36,7 @@ pygraphviz = { version = "^1.7", optional = true }
 
 # Deployment
 whitenoise = "^5.3"
-gunicorn = "^20.0.4"
+gunicorn = "^20.1"
 
 [tool.poetry.dev-dependencies]
 
@@ -53,7 +53,7 @@ types-requests = "*"
 
 # Testing
 pytest = "^6.2.5"
-pytest-django = "*"
+pytest-django = "^4.5.2"
 pytest-describe = "^2.0"
 pytest-expecter = "^2.0"
 pytest-randomly = "*"

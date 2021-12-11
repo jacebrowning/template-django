@@ -1,7 +1,5 @@
 import os
 
-import grappelli
-
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CONFIG_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PROJECT_ROOT = os.path.dirname(CONFIG_ROOT)
@@ -12,8 +10,6 @@ ALLOW_DEBUG = False
 # Core
 
 INSTALLED_APPS = [
-    'grappelli',
-
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -117,8 +113,6 @@ TIME_ZONE = 'US/Michigan'
 
 USE_I18N = True
 
-USE_L10N = True
-
 USE_TZ = True
 
 ###############################################################################
@@ -133,13 +127,6 @@ STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
 # CORS
 
 CORS_ORIGIN_ALLOW_ALL = True
-
-###############################################################################
-# Grappelli
-
-GRAPPELLI_ADMIN_TITLE = "{{cookiecutter.project_name}} Admin"
-
-del grappelli.default_app_config  # fixes RemovedInDjango41Warning
 
 ###############################################################################
 # Django Debug Toolbar
