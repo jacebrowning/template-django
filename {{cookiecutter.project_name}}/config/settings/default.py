@@ -35,6 +35,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
+    "bugsnag.django.middleware.BugsnagMiddleware",
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -80,6 +81,10 @@ LOGGING = {
             'class': 'logging.StreamHandler',
             'formatter': 'simple',
         },
+        "bugsnag": {
+            "level": "CRITICAL",
+            "class": "bugsnag.handlers.BugsnagHandler",
+        },
     },
     'loggers': {
         'django': {
@@ -87,7 +92,7 @@ LOGGING = {
             'level': 'INFO',
         },
         '{{cookiecutter.project_name}}': {
-            'handlers': ['console'],
+            'handlers': ['console', 'bugsnag'],
             'level': 'DEBUG',
         },
     }
