@@ -1,5 +1,7 @@
 # mypy: ignore-errors
 
+import bugsnag
+
 from .default import *
 
 
@@ -26,3 +28,10 @@ DATABASES = {
         'HOST': '127.0.0.1',
     }
 }
+
+###############################################################################
+# Bugsnag
+
+bugsnag.configure(release_stage="test")
+
+LOGGING["loggers"]["{{cookiecutter.project_name}}"]['handlers'].remove("bugsnag")

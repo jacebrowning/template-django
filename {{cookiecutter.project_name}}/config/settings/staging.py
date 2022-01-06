@@ -1,5 +1,7 @@
 # mypy: ignore-errors
 
+import bugsnag
+
 from .production import *
 
 
@@ -20,3 +22,8 @@ ALLOWED_HOSTS += [
     '.herokuapp.com',
     # TODO: Add your custom domain
 ]
+
+###############################################################################
+# Bugsnag
+
+bugsnag.configure(release_stage="staging")
