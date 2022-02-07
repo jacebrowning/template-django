@@ -57,8 +57,4 @@ AUTH_PASSWORD_VALIDATORS = [
 ###############################################################################
 # Static files
 
-if BASE_NAME == "local":
-    # Workaround to emulate production locally via: $ make run-production
-    STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
-else:
-    STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
