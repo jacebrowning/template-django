@@ -12,7 +12,7 @@ license = "Unlicensed"
 python = "~3.9"
 
 # Django
-django = "~4.0"
+django = "~4.0.2"
 django-allauth = "*"
 django-cors-headers = "*"
 django-debug-toolbar = "^3.2.2"
