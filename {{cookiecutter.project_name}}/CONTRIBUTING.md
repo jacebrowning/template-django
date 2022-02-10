@@ -48,7 +48,7 @@ $ make test
 or keep them running on change:
 
 ```
-$ make watch
+$ make dev
 ```
 
 > In order to have OS X notifications, `brew install terminal-notifier`.

@@ -12,8 +12,8 @@ all: install
 .PHONY: ci
 ci: check test ## CI | Run all validation targets
 
-.PHONY: watch
-watch: install ## CI | Rerun all validation targests in a loop
+.PHONY: dev
+dev: install ## CI | Rerun all validation targests in a loop
 	@ rm -rf $(FAILURES)
 	$(RUN) sniffer
 
@@ -66,12 +66,11 @@ $(FRONTEND_DEPENDENCIES):
 
 .PHONY: clean
 clean:
-	rm -rf staticfiles
-	rm -rf .coverage htmlcov
+	rm -rf .cache .coverage htmlcov staticfiles
 
 .PHONY: clean-all
 clean-all: clean
-	# TODO: Delete all frontend files
+	# TODO: Delete compiled frontend dependencies if applicable
 	rm -rf $(VIRTUAL_ENV)
 
 # RUNTIME DEPENDENCIES ########################################################

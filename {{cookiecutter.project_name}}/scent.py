@@ -15,8 +15,8 @@ else:
 watch_paths = [
     "{{cookiecutter.project_name}}",
     "config",
-    "frontend",
-    "tests",
+    "templates",
+    "tests"
 ]
 
 class options:
