@@ -46,11 +46,9 @@ black = "^22.1"
 isort = "^5.10"
 
 # Linters
-pylint = "~2.11.1"
-mypy = "~0.910"
+pylint = "~2.12.2"
+mypy = "~0.931"
 django-stubs = "~1.9.0"
-types-freezegun = "*"
-types-requests = "*"
 
 # Testing
 pytest = "^6.2.5"
@@ -105,3 +103,26 @@ plugins = ["mypy_django_plugin.main"]
 [tool.django-stubs]
 
 django_settings_module = "config.settings.local"
+
+[tool.pytest]
+
+DJANGO_SETTINGS_MODULE = "config.settings.test"
+
+addopts = """
+--strict-markers
+--pdbcls=tests.debugger:Debugger
+
+--quiet
+-r sxX
+
+--fail-on-template-vars
+
+--cov={{cookiecutter.project_name}}
+--cov-report=html
+--cov-report=term-missing:skip-covered
+--no-cov-on-fail
+"""
+
+cache_dir = ".cache/pytest/"
+
+markers = []
