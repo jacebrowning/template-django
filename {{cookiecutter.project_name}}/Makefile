@@ -47,6 +47,7 @@ $(BACKEND_DEPENDENCIES): poetry.lock runtime.txt requirements.txt
 	@ rm -rf $(VIRTUAL_ENV)/.poetry-*
 	@ poetry config virtualenvs.in-project true
 	poetry install
+	poetry run mypy --install-types --non-interactive
 	@ mkdir -p staticfiles
 	@ touch $@
 
@@ -98,7 +99,7 @@ reset: install ## Database | Create a new database, migrate, and seed it
 # VALIDATION TARGETS ##########################################################
 
 PYTHON_PACKAGES := config {{cookiecutter.project_name}}
-FAILURES := .cache/v/cache/lastfailed
+FAILURES := .cache/pytest/v/cache/lastfailed
 
 .PHONY: check
 check: check-backend ## Run static analysis

@@ -12,14 +12,14 @@ all: install
 ci: build
 	make ci -C $(OUTPUT) CI=true
 
-.PHONY: watch
-watch: install
+.PHONY: dev
+dev: install
 	rm -rf $(OUTPUT)/*
 	@ sleep 2 && touch $(INPUT)/pyproject.toml &
-	poetry run watchmedo shell-command --command="make .watch" --recursive --wait $(INPUT)
+	poetry run watchmedo shell-command --command="make .ci-verbose" --recursive --wait $(INPUT)
 
-.PHONY: .watch
-.watch:
+.PHONY: .ci-verbose
+.ci-verbose:
 	@ echo
 	@ echo "Genereating and testing the demo project..."
 	@ echo
