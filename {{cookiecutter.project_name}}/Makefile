@@ -47,7 +47,6 @@ $(BACKEND_DEPENDENCIES): poetry.lock runtime.txt requirements.txt
 	@ rm -rf $(VIRTUAL_ENV)/.poetry-*
 	@ poetry config virtualenvs.in-project true
 	poetry install
-	poetry run mypy --install-types --non-interactive
 	@ mkdir -p staticfiles
 	@ touch $@
 

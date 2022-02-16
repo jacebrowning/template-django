@@ -49,6 +49,8 @@ isort = "^5.10"
 pylint = "~2.12.2"
 mypy = "~0.931"
 django-stubs = "~1.9.0"
+types-freezegun = "*"
+types-requests = "*"
 
 # Testing
 pytest = "^6.2.5"
