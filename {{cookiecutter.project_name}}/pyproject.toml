@@ -106,7 +106,7 @@ plugins = ["mypy_django_plugin.main"]
 
 django_settings_module = "config.settings.local"
 
-[tool.pytest]
+[tool.pytest.ini_options]
 
 DJANGO_SETTINGS_MODULE = "config.settings.test"
 
