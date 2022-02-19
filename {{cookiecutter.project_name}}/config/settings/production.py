@@ -20,6 +20,10 @@ ALLOWED_HOSTS = [
     '.herokuapp.com',  # TODO: Remove this line and add your custom domain
 ]
 
+CSRF_TRUSTED_ORIGINS = [
+    "https://*herokuapp.com",  # TODO: Remove this line and add your custom domain
+] 
+
 ###############################################################################
 # Databases
 
