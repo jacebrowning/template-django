@@ -57,7 +57,7 @@ def matches(path, *extensions):
 @runnable
 def backend_targets(*_args):
     return run("Backend", [
-        ("Unit Tests", "make test-backend-unit", True),
+        ("Unit Tests", "make test-backend-unit DISABLE_COVERAGE=true", True),
         ("Integration Tests", "make test-backend-all", False),
         ("Static Analysis", "make check-backend", True),
     ])
