@@ -35,8 +35,9 @@ minilog = "^2.0"
 pygraphviz = { version = "^1.7", optional = true }
 
 # Deployment
-whitenoise = "^5.3"
+daphne = "^3.0.2"
 gunicorn = "^20.1"
+whitenoise = "^5.3"
 bugsnag = "^4.1.1"
 
 [tool.poetry.dev-dependencies]

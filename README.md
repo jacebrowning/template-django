@@ -49,6 +49,8 @@ You'll need to set the following environment variables in all environments:
 | `DATABASE_URL` | `postgres://USER:PASSWORD@HOST:PORT/NAME` | Specify the database URL for the application to use, following the schema used by [dj_database_url](https://github.com/kennethreitz/dj-database-url#url-schema) |
 | `BUGSNAG_API_KEY` | `<secret>` | Optional API key to enable the Bugsnag integration |
 
+The generated `Procfile` can use an ASGI web server, if desired. Uncomment the `daphne` line and delete all references to `gunicorn`.
+
 ## Updates
 
 Checkout the appropriate branch of [template-django-demo](https://github.com/jacebrowning/template-django-demo) and manually merge changes into your project.
