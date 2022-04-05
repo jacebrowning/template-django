@@ -10,7 +10,7 @@ This is a [cookiecutter](https://github.com/audreyr/cookiecutter) template for a
 * Unit and integration testing using `pytest`, `pytest-describe`, and `pytest-expecter`
 * End-to-end testing using [Splinter](https://splinter.readthedocs.io/)
 * `Makefile` for automating common development tasks:
-    - Installing dependencies into a virtual environment using `poety`
+    - Installing dependencies into a virtual environment using `poetry`
     - Generate superuser and other fixtures to seed the database
     - Running tests against the backend and frontend
     - Running type checks (`mypy`) and linters (`pylint`)
@@ -48,8 +48,7 @@ You'll need to set the following environment variables in all environments:
 | `SECRET_KEY` | `<generated>` | Securely encrypt passwords in the database |
 | `DATABASE_URL` | `postgres://USER:PASSWORD@HOST:PORT/NAME` | Specify the database URL for the application to use, following the schema used by [dj_database_url](https://github.com/kennethreitz/dj-database-url#url-schema) |
 | `BUGSNAG_API_KEY` | `<secret>` | Optional API key to enable the Bugsnag integration |
-
-The generated `Procfile` can use an ASGI web server, if desired. Uncomment the `daphne` line and delete all references to `gunicorn`.
+| `MAX_REQUESTS[_JITTER]` | `<int>` | Optional values to help deal with [memory leaks](https://docs.gunicorn.org/en/stable/settings.html?highlight=memory%20leaks#max-requests) |
 
 ## Updates
 

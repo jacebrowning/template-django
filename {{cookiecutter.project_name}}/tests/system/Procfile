@@ -1,3 +1,2 @@
-web: bin/post_compile > /dev/null && gunicorn config.wsgi --bind=127.0.0.1:8001
-# web: bin/post_compile > /dev/null && daphne config.asgi:application --port 8001
+web: bin/post_compile > /dev/null && gunicorn config.asgi --bind 0.0.0.0:8001 --worker-class uvicorn.workers.UvicornWorker
 test: pytest tests/system -c tests/system/pytest.ini

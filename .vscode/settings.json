@@ -1,0 +1,11 @@
+{
+    "cSpell.words": [
+        "ASGI",
+        "BUGSNAG",
+        "COLLECTSTATIC",
+        "cookiecutter",
+        "gunicorn",
+        "mypy",
+        "Procfile"
+    ]
+}

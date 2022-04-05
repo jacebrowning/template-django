@@ -1,3 +1,2 @@
-web: gunicorn config.wsgi --log-file -
-# web: daphne config.asgi:application --bind 0.0.0.0 --port ${PORT}
+web: gunicorn config.asgi --bind 0.0.0.0:${PORT:-5000} --worker-class uvicorn.workers.UvicornWorker --max-requests=${MAX_REQUESTS:-0} --max-requests-jitter=${MAX_REQUESTS_JITTER:-0}
 release: python manage.py migrate && python manage.py cleandata

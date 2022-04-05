@@ -35,8 +35,8 @@ minilog = "^2.0"
 pygraphviz = { version = "^1.7", optional = true }
 
 # Deployment
-daphne = "^3.0.2"
 gunicorn = "^20.1"
+uvicorn = "~0.17"
 whitenoise = "^5.3"
 bugsnag = "^4.1.1"
 
