@@ -165,7 +165,7 @@ test-system: install
 
 .PHONY: run
 run: .envrc install migrate ## Run the applicaiton
-	$(RUN) honcho start --procfile=Procfile.dev --port=$${PORT:-8000}
+	$(RUN) python manage.py runserver
 
 .PHONY: run-production
 run-production: .envrc install
