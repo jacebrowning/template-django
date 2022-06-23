@@ -134,7 +134,9 @@ test-backend-unit: install
 	@ ( mv $(FAILURES) $(FAILURES).bak || true ) > /dev/null 2>&1
 	$(RUN) pytest $(PYTHON_PACKAGES) tests/unit -m "not django_db" $(PYTEST_OPTIONS)
 	@ ( mv $(FAILURES).bak $(FAILURES) || true ) > /dev/null 2>&1
+ifndef DISABLE_COVERAGE
 	$(RUN) coveragespace update unit
+endif
 
 .PHONY: test-backend-integration
 test-backend-integration: install
