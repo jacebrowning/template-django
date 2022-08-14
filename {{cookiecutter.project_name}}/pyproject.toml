@@ -62,7 +62,7 @@ pytest-randomly = "*"
 pytest-cov = "^2.8.0"
 time-machine = "^2.6"
 coverage = "^5.0"
-coveragespace = "^4.0"
+coveragespace = "^5.0"
 
 # E2E
 fire = "*"
