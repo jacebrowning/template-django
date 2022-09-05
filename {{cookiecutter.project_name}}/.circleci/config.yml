@@ -1,39 +1,46 @@
-version: 2
+version: 2.1
+
+orbs:
+  browser-tools: circleci/browser-tools@1.4.0
 
 jobs:
   build:
     working_directory: ~/{{cookiecutter.project_name}}
 
     docker:
-      - image: circleci/python:3.9.9-node-browsers
+      - image: cimg/python:3.9.9-node-browsers
         environment:
           DATABASE_URL: postgres://circleci:@127.0.0.1:5432/{{cookiecutter.project_name}}_test
           REDIS_URL: redis://127.0.0.1:6379/0
-      - image: circleci/postgres:13.5
+          
+      - image: cimg/postgres:13.5
         environment:
           - POSTGRES_USER=circleci
           - POSTGRES_DB={{cookiecutter.project_name}}_test
           - POSTGRES_HOST_AUTH_METHOD=trust
+          
       - image: redis
 
     steps:
+      - browser-tools/install-firefox
+      - browser-tools/install-geckodriver
       - checkout
 
       - run:
           name: Checking system dependencies
           command: make doctor
-
-      - type: cache-restore
-        key: poetry-{% raw %}{{ checksum "poetry.lock" }}{% endraw %}
+        
+      - restore_cache:
+          key: poetry-{% raw %}{{ checksum "poetry.lock" }}{% endraw %}
 
       - run:
           name: Installing project dependencies
           command: make install
 
-      - type: cache-save
-        key: poetry-{% raw %}{{ checksum "poetry.lock" }}{% endraw %}
-        paths:
-          - .venv
+      - save_cache:
+          key: poetry-{% raw %}{{ checksum "poetry.lock" }}{% endraw %}
+          paths:
+            - .venv
 
       - run:
           name: Checking backend code
