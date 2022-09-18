@@ -1,6 +1,6 @@
 language: python
 python:
-  - "3.10"
+  - "3.10.0"
 
 cache:
   pip: true
