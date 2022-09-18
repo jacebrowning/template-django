@@ -2,9 +2,12 @@
     "cSpell.words": [
         "ASGI",
         "BUGSNAG",
+        "cimg",
         "COLLECTSTATIC",
         "cookiecutter",
+        "endraw",
         "gunicorn",
+        "htmlcov",
         "mypy",
         "Procfile"
     ]

@@ -54,15 +54,15 @@ django-stubs = "~1.9.0"
 types-requests = "*"
 
 # Testing
-pytest = "^6.2.5"
-pytest-django = "^4.5.2"
+pytest = "^7.1"
+pytest-django = "^4.5"
 pytest-describe = "^2.0"
-pytest-expecter = "^2.3"
+pytest-expecter = "^3.0"
 pytest-randomly = "*"
 pytest-cov = "^2.8.0"
 time-machine = "^2.6"
 coverage = "^5.0"
-coveragespace = "^5.0"
+coveragespace = "^6.0"
 
 # E2E
 fire = "*"
