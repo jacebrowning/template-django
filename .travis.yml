@@ -1,6 +1,8 @@
+dist: focal
+
 language: python
 python:
-  - "3.10.0"
+  - "3.10"
 
 cache:
   pip: true
