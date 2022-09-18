@@ -6,6 +6,7 @@
         "COLLECTSTATIC",
         "cookiecutter",
         "endraw",
+        "geckodriver",
         "gunicorn",
         "htmlcov",
         "mypy",

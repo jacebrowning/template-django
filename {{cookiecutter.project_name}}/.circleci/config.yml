@@ -8,17 +8,17 @@ jobs:
     working_directory: ~/{{cookiecutter.project_name}}
 
     docker:
-      - image: cimg/python:3.9.9-node-browsers
+      - image: cimg/python:3.10.6-browsers
         environment:
           DATABASE_URL: postgres://circleci:@127.0.0.1:5432/{{cookiecutter.project_name}}_test
           REDIS_URL: redis://127.0.0.1:6379/0
-          
+
       - image: cimg/postgres:13.5
         environment:
           - POSTGRES_USER=circleci
           - POSTGRES_DB={{cookiecutter.project_name}}_test
           - POSTGRES_HOST_AUTH_METHOD=trust
-          
+
       - image: redis
 
     steps:
@@ -29,7 +29,7 @@ jobs:
       - run:
           name: Checking system dependencies
           command: make doctor
-        
+
       - restore_cache:
           key: poetry-{% raw %}{{ checksum "poetry.lock" }}{% endraw %}
 
