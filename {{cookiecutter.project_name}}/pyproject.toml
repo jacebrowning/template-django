@@ -23,7 +23,7 @@ django-extensions = "*"
 djangorestframework = "~3.12.4"
 pytz = "*" # required by 'djangorestframework' until it supports Django 4.x
 drf-nested-routers = "~0.93.4"
-drf-yasg = "~1.20"
+drf-yasg = "~1.21"
 
 # Storage
 dj-database-url = "~0.4.2"
