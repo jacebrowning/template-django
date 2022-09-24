@@ -24,7 +24,7 @@ LOGGING['loggers']['{{cookiecutter.project_name}}']['level'] = 'DEBUG'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': '{{cookiecutter.project_name}}_test',
+        'NAME': '{{cookiecutter.project_name}}',  # automatically prefixed with "test_"
         'HOST': '127.0.0.1',
     }
 }
