@@ -49,7 +49,7 @@ isort = "^5.10"
 
 # Linters
 pylint = "~2.15"
-mypy = "~0.931"
+mypy = "~0.990"
 django-stubs = "~1.9.0"
 types-requests = "*"
 
