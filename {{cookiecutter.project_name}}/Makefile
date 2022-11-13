@@ -125,7 +125,7 @@ endif
 
 .PHONY: test
 test: test-backend test-frontend ## Run all tests
-ifdef CI
+ifdef COVERALLS_REPO_TOKEN
 	poetry run coveralls
 endif
 
