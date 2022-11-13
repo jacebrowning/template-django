@@ -48,7 +48,7 @@ jobs:
 
       - run:
           name: Running backend tests
-          command: make test-backend && sudo pip install coveralls && coveralls
+          command: make test-backend
 
       - run:
           name: Running frontend tests

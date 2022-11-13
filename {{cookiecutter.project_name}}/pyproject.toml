@@ -63,6 +63,7 @@ pytest-cov = "^2.8.0"
 time-machine = "^2.6"
 coverage = "^5.0"
 coveragespace = "^6.0"
+coveralls = "*"
 
 # E2E
 fire = "*"

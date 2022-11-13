@@ -125,6 +125,9 @@ endif
 
 .PHONY: test
 test: test-backend test-frontend ## Run all tests
+ifdef CI
+	poetry run coveralls
+endif
 
 .PHONY: test-backend
 test-backend: test-backend-all
