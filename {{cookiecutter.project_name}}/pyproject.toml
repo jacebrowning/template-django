@@ -9,7 +9,7 @@ license = "Unlicensed"
 
 [tool.poetry.dependencies]
 
-python = "~3.10"
+python = "~3.11"
 
 # Django
 django = "~4.1"
@@ -48,13 +48,13 @@ black = "^22.1"
 isort = "^5.10"
 
 # Linters
-pylint = "~2.12.2"
-mypy = "~0.931"
+pylint = "~2.15"
+mypy = "~0.990"
 django-stubs = "~1.9.0"
 types-requests = "*"
 
 # Testing
-pytest = "^7.1"
+pytest = "^7.2"
 pytest-django = "^4.5"
 pytest-describe = "^2.0"
 pytest-expecter = "^3.0"
