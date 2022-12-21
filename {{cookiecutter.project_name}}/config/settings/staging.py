@@ -2,7 +2,7 @@
 
 import bugsnag
 
-from .production import *
+from .production import *  # pylint: disable=wildcard-import,unused-wildcard-import
 
 
 BASE_NAME = os.environ['HEROKU_APP_NAME']

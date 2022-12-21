@@ -2,7 +2,7 @@ import os
 
 import dj_database_url
 
-from .default import *
+from .default import *  # pylint: disable=wildcard-import,unused-wildcard-import
 
 
 BASE_NAME = os.environ['HEROKU_APP_NAME']
@@ -22,7 +22,7 @@ ALLOWED_HOSTS = [
 
 CSRF_TRUSTED_ORIGINS = [
     "https://*herokuapp.com",  # TODO: Remove this line and add your custom domain
-] 
+]
 
 ###############################################################################
 # Databases

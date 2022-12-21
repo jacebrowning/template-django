@@ -2,7 +2,7 @@
 
 import bugsnag
 
-from .default import *
+from .default import *  # pylint: disable=wildcard-import,unused-wildcard-import
 
 
 # BASE_NAME and BASE_DOMAIN are intentionally unset
