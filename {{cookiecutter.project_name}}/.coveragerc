@@ -9,3 +9,11 @@ omit =
     */tests/*
     */admin.py
     */wsgi.py
+    
+[report]
+
+exclude_lines =
+    pragma: no cover
+    raise NotImplementedError
+    except DistributionNotFound
+    TYPE_CHECKING
