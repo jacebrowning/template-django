@@ -97,6 +97,8 @@ ignore_missing_imports = true
 no_implicit_optional = true
 check_untyped_defs = true
 
+exclude = ".+/migrations/.+"
+
 cache_dir = ".cache/mypy/"
 
 plugins = ["mypy_django_plugin.main"]
