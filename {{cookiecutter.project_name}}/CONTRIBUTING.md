@@ -8,7 +8,7 @@
     * Windows: http://mingw.org/download/installer
     * Mac: http://developer.apple.com/xcode
     * Linux: http://www.gnu.org/software/make
-* Python: `$ pyenv install` or `$ asdf install`
+* Python: `$ asdf install`
 * Poetry: https://python-poetry.org/docs/#installation
 * PostgreSQL: `$ brew install postgres`
 * direnv: https://direnv.net/
