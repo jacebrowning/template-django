@@ -5,6 +5,7 @@
         "cimg",
         "COLLECTSTATIC",
         "cookiecutter",
+        "direnv",
         "endraw",
         "geckodriver",
         "gunicorn",
