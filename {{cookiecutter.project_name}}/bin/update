@@ -56,7 +56,6 @@ def copy():
         ".gitignore",
         ".pylint.ini",
         ".verchew.ini",
-        "app.json",
         "CONTRIBUTING.md",
         "Makefile",
         "scent.py",
