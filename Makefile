@@ -39,7 +39,7 @@ install: $(VIRTUAL_ENV)/.flag
 
 ifndef CI
 poetry.lock: pyproject.toml
-	poetry lock
+	poetry lock --no-update
 	@ touch $@
 endif
 

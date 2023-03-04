@@ -13,6 +13,7 @@ cookiecutter = "*"
 watchdog = "*"
 pyyaml = "*" # missing dependency for 'watchdog'
 argh = "*" # missing dependency for 'watchdog'
+black = "^23.1"
 
 [build-system]
 

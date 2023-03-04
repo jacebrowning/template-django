@@ -5,6 +5,7 @@
         "cimg",
         "COLLECTSTATIC",
         "cookiecutter",
+        "coveragerc",
         "direnv",
         "endraw",
         "envrc",
@@ -12,6 +13,8 @@
         "gunicorn",
         "htmlcov",
         "mypy",
-        "Procfile"
-    ]
+        "Procfile",
+        "verchew"
+    ],
+    "python.formatting.provider": "black"
 }
