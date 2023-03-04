@@ -16,3 +16,12 @@ __pycache__/
 
 # Collected static files
 /staticfiles/
+
+# Temporary files
+/.cache/
+/tmp/
+
+################################################################################
+# Heroku
+
+bin/start-pgbouncer
