@@ -6,28 +6,29 @@ OUTPUT := demo_project
 # MAIN ########################################################################
 
 .PHONY: all
-all: install
-
-.PHONY: ci
-ci: build
-	make ci -C $(OUTPUT) CI=true
+all: build
+	make all -C $(OUTPUT) CI=true
 
 .PHONY: dev
 dev: install
 	rm -rf $(OUTPUT)/*
 	@ sleep 2 && touch $(INPUT)/pyproject.toml &
-	poetry run watchmedo shell-command --command="make .ci-verbose" --recursive --wait $(INPUT)
+	poetry run watchmedo shell-command --command="make .all-verbose" --recursive --wait $(INPUT)
 
-.PHONY: .ci-verbose
-.ci-verbose:
+.PHONY: .all-verbose
+.all-verbose:
 	@ echo
 	@ echo "Genereating and testing the demo project..."
 	@ echo
-	@ make ci
+	@ make all
 	@ echo
 	@ echo "All tests passed."
 
 # DEPENDENCIES ################################################################
+
+.PHONY: doctor
+doctor:
+	{{cookiecutter.project_name}}/bin/verchew
 
 .PHONY: install
 install: $(VIRTUAL_ENV)/.flag
@@ -55,3 +56,5 @@ build: install
 clean:
 	rm -rf $(OUTPUT)
 	rm -rf $(VIRTUAL_ENV)
+
+.DEFAULT_GOAL := install

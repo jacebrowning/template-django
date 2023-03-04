@@ -66,5 +66,5 @@ $ make check
 The CI server will report overall build status:
 
 ```
-$ make ci
+$ make all
 ```
