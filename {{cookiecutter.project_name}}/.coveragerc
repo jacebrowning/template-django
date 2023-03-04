@@ -9,7 +9,7 @@ omit =
     */tests/*
     */admin.py
     */wsgi.py
-    
+
 [report]
 
 exclude_lines =

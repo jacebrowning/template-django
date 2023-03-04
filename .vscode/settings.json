@@ -14,7 +14,8 @@
         "htmlcov",
         "mypy",
         "Procfile",
-        "verchew"
+        "verchew",
+        "wsgi"
     ],
     "python.formatting.provider": "black"
 }
