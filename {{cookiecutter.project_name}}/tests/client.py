@@ -5,7 +5,7 @@ Command-line client to manually interact with the running application.
 
 Usage:
 
-    pipenv run python tests/client.py <function> [<arguments>]
+    poetry run python tests/client.py <function> [<arguments>]
 
 """
 
