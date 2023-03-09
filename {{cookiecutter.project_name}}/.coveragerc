@@ -9,6 +9,8 @@ omit =
     */tests/*
     */admin.py
     */wsgi.py
+    
+data_file = .cache/coverage
 
 [report]
 
