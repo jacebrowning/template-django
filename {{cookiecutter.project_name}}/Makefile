@@ -7,7 +7,7 @@ else
 endif
 
 .PHONY: all
-all: check test ## CI | Run all validation targets
+all: doctor check test ## CI | Run all validation targets
 
 .PHONY: dev
 dev: install ## CI | Rerun all validation targests in a loop
