@@ -12,14 +12,28 @@ __pycache__/
 # Test files
 /.coverage
 /htmlcov/
-.*cache/
+
+# Documentation
+/docs/
 
 # Collected static files
 /staticfiles/
 
 # Temporary files
-/.cache/
+.*cache/
 /tmp/
+
+################################################################################
+# E2E
+
+# Selenium
+geckodriver.log
+
+# Pomace
+pomace.yml
+
+# Jupyter
+.ipynb_checkpoints/
 
 ################################################################################
 # Heroku
