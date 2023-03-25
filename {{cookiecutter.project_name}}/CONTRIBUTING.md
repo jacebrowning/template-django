@@ -16,6 +16,7 @@
 To confirm these system dependencies are configured correctly:
 
 ```
+# make bootstrap
 $ make doctor
 ```
 
