@@ -8,8 +8,7 @@
   - macOS: `$ xcode-select --install`
   - Linux: [https://www.gnu.org](https://www.gnu.org/software/make)
   - Windows: `$ choco install make` [https://chocolatey.org](https://chocolatey.org/install)
-* Python: `$ asdf install` (https://asdf-vm.com)[https://asdf-vm.com/guide/getting-started.html]
-* Poetry: [https://python-poetry.org](https://python-poetry.org/docs/#installation)
+* Python: `$ asdf install` [https://asdf-vm.com](https://asdf-vm.com/guide/getting-started.html)
 * PostgreSQL: `$ brew install postgres`
 * direnv: https://direnv.net
 
