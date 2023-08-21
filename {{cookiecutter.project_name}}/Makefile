@@ -16,8 +16,8 @@ dev: install ## CI | Rerun all validation targests in a loop
 
 # SYSTEM DEPENDENCIES #########################################################
 
-.PHONY: boostrap
-boostrap: ## Attempt to install system dependencies
+.PHONY: bootstrap
+bootstrap: ## Attempt to install system dependencies
 	asdf plugin add python || asdf plugin update python
 	asdf plugin add poetry https://github.com/asdf-community/asdf-poetry.git || asdf plugin update poetry
 	asdf install
