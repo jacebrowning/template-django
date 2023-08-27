@@ -26,8 +26,8 @@ dev: install
 
 # DEPENDENCIES ################################################################
 
-.PHONY: boostrap
-boostrap:
+.PHONY: bootstrap
+bootstrap:
 	asdf plugin add python || asdf plugin update python
 	asdf plugin add poetry https://github.com/asdf-community/asdf-poetry.git || asdf plugin update poetry
 	asdf install
