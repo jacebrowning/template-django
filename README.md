@@ -37,8 +37,15 @@ $ make format
 
 ## Deploying
 
-This template builds projects intended to be deployed on Heroku.
-You'll need to set the following environment variables in all environments:
+This template builds projects intended to be deployed on Heroku:
+
+```
+$ heroku buildpacks:clear
+$ heroku buildpacks:add https://github.com/moneymeets/python-poetry-buildpack.git
+$ heroku buildpacks:add heroku/python
+```
+
+You'll also need to set the following environment variables in all environments:
 
 | Name | Value | Purpose |
 | --- | --- | --- |
@@ -52,5 +59,8 @@ You'll need to set the following environment variables in all environments:
 
 ## Updates
 
-Checkout the appropriate branch of [template-django-demo](https://github.com/jacebrowning/template-django-demo) and manually merge changes into your project.
+Run the update tool, which is generated inside each project:
 
+```
+$ bin/update
+```
