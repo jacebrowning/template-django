@@ -9,7 +9,7 @@ license = "Unlicensed"
 
 [tool.poetry.dependencies]
 
-python = "~3.11"
+python = "3.11.0"
 
 # Django
 django = "~4.1"

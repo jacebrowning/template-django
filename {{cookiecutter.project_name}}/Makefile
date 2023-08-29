@@ -46,7 +46,7 @@ ifndef SKIP_INSTALL
 install: $(BACKEND_DEPENDENCIES) $(FRONTEND_DEPENDENCIES) ## Install project dependencies
 endif
 
-$(BACKEND_DEPENDENCIES): poetry.lock runtime.txt requirements.txt
+$(BACKEND_DEPENDENCIES): poetry.lock
 	@ rm -rf $(VIRTUAL_ENV)/.poetry-*
 	@ rm -rf ~/Library/Preferences/pypoetry
 	@ poetry config virtualenvs.in-project true
@@ -58,10 +58,6 @@ ifndef CI
 poetry.lock: pyproject.toml
 	poetry lock --no-update
 	@ touch $@
-runtime.txt: .tool-versions
-	echo $(shell grep '^python ' $< | tr ' ' '-') > $@
-requirements.txt: poetry.lock
-	poetry export --format requirements.txt --output $@ --without-hashes
 endif
 
 $(FRONTEND_DEPENDENCIES):
