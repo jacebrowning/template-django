@@ -76,7 +76,7 @@ clean-all: clean
 # RUNTIME DEPENDENCIES ########################################################
 
 .PHONY: migrations
-migrations: install  ## Database | Generate database migrations
+migrations: install ## Database | Generate database migrations
 	$(RUN) python manage.py makemigrations
 
 .PHONY: migrate
