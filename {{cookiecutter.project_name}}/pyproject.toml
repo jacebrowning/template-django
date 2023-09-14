@@ -13,7 +13,7 @@ python = "3.11.0"
 
 # Django
 django = "~4.2"
-django-allauth = "*"
+django-allauth = "~0.55"
 django-browser-reload = "^1.3"
 django-cors-headers = "*"
 django-debug-toolbar = "^3.2.2"
