@@ -65,7 +65,7 @@ $(FRONTEND_DEPENDENCIES):
 	@ touch $@
 
 .PHONY: clean
-clean:
+clean: ## Delete all generated and temporary files
 	rm -rf .cache .coverage htmlcov staticfiles
 	rm -rf $(VIRTUAL_ENV)
 	# TODO: Delete compiled frontend dependencies if applicable
