@@ -48,8 +48,8 @@ isort = "^5.10"
 
 # Linters
 pylint = "~2.15"
-mypy = "~0.982"
-django-stubs = { extras = ["compatible-mypy"], version = "^1.13.1" }
+mypy = "~1.6"
+django-stubs = { version = "^4.2.6", extras = ["compatible-mypy"] }
 types-requests = "*"
 
 # Testing
