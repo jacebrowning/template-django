@@ -48,6 +48,7 @@ isort = "^5.10"
 
 # Linters
 pylint = "~2.15"
+pylint-pytest = "*"
 mypy = "~1.6"
 django-stubs = { version = "^4.2.6", extras = ["compatible-mypy"] }
 types-requests = "*"
