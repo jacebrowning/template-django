@@ -116,6 +116,7 @@ check-frontend: install
 format-backend: install
 	$(RUN) isort $(PYTHON_PACKAGES) tests
 	$(RUN) black $(PYTHON_PACKAGES) tests
+	$(RUN) djlint --reformat templates
 
 ifdef DISABLE_COVERAGE
 PYTEST_OPTIONS := --no-cov --disable-warnings
