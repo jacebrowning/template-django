@@ -40,6 +40,9 @@ CACHES = {
     }
 }
 
+if "rediss" in os.environ["REDIS_URL"]:
+    CACHES["default"]["OPTIONS"] = {"ssl_cert_reqs": None}
+
 ###############################################################################
 # Authentication
 
