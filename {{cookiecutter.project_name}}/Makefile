@@ -10,7 +10,7 @@ endif
 all: doctor check test ## CI | Run all validation targets
 
 .PHONY: dev
-dev: install ## CI | Rerun all validation targests in a loop
+dev: install ## CI | Rerun all validation targets in a loop
 	@ rm -rf $(FAILURES)
 	$(RUN) sniffer
 
