@@ -1,2 +1,1 @@
-python 3.11.0
-poetry 1.7.0
+{{cookiecutter.project_name}}/.tool-versions

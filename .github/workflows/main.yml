@@ -1,0 +1,56 @@
+name: main
+
+on: [push, pull_request]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ['3.11']
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ matrix.python-version }}
+
+    - uses: Gr1N/setup-poetry@v8
+
+    - name: Check dependencies
+      run: make doctor
+
+    - uses: actions/cache@v4
+      with:
+        path: .venv
+        key: ${{ runner.os }}-poetry-${{ hashFiles('poetry.lock') }}
+
+    - name: Install dependencies
+      run: make install
+
+    - name: Build and test
+      run: make all
+
+    - name: Publish the demo
+      if: github.ref_name == 'main' && github.event_name != 'pull_request'
+      env:
+        GH_TOKEN: ${{ secrets.GH_TOKEN }}
+      run: |
+
+        # Clone the existing live demo
+        git clone https://github.com/jacebrowning/template-django-demo temp
+        mv temp/.git TemplateDemo/.git
+        cd TemplateDemo
+
+        # Configure Git with GHA information, for more info see:
+        # https://github.com/actions/checkout?tab=readme-ov-file#push-a-commit-using-the-built-in-token
+        git config user.name "github-actions[bot]"
+        git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+        # Rebuild the repository from the generated files and push to GitHub
+        git add --all
+        git commit -m "Deploy GHA build ${{ github.run_id }} to GitHub"
+        git push -f https://${GH_TOKEN}@github.com/jacebrowning/template-django-demo main
