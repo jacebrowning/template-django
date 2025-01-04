@@ -42,8 +42,8 @@ jobs:
 
         # Clone the existing live demo
         git clone https://github.com/jacebrowning/template-django-demo temp
-        mv temp/.git TemplateDemo/.git
-        cd TemplateDemo
+        mv temp/.git demo_project/.git
+        cd demo_project
 
         # Configure Git with GHA information, for more info see:
         # https://github.com/actions/checkout?tab=readme-ov-file#push-a-commit-using-the-built-in-token
