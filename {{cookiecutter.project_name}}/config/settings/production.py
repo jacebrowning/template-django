@@ -33,7 +33,7 @@ DATABASES['default'] = dj_database_url.config()
 ###############################################################################
 # Caches
 
-CACHES = {
+CACHES: dict = {
     'default': {
         'BACKEND': 'django.core.cache.backends.redis.RedisCache',
         'LOCATION': os.environ['REDIS_URL'],

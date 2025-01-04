@@ -11,9 +11,12 @@
         "envrc",
         "geckodriver",
         "gunicorn",
+        "herokuapp",
         "htmlcov",
         "mypy",
         "Procfile",
+        "rediss",
+        "reqs",
         "verchew",
         "wsgi"
     ],
