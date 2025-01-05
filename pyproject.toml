@@ -1,9 +1,9 @@
 [tool.poetry]
 
-name = "template-django"
-version = "1.0"
 description = "A template for new Django projects."
 authors = ["Jace Browning <jacebrowning@gmail.com>"]
+
+package-mode = false
 
 [tool.poetry.dependencies]
 
