@@ -40,7 +40,7 @@ uvicorn = "~0.17"
 whitenoise = "^5.3"
 bugsnag = "^4.1.1"
 
-[tool.poetry.dev-dependencies]
+[tool.poetry.group.dev.dependencies]
 
 # Formatting
 black = "^22.1"
