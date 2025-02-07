@@ -22,7 +22,7 @@ django-extensions = "*"
 # API
 djangorestframework = "~3.14"
 drf-nested-routers = "~0.93.4"
-drf-yasg = "~1.21"
+drf-yasg = "~1.21.8"
 
 # Storage
 dj-database-url = "~0.4.2"

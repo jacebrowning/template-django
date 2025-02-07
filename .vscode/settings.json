@@ -10,6 +10,7 @@
         "endraw",
         "envrc",
         "geckodriver",
+        "Genereating",
         "gunicorn",
         "herokuapp",
         "htmlcov",
@@ -18,6 +19,8 @@
         "rediss",
         "reqs",
         "verchew",
+        "virtualenvs",
+        "watchmedo",
         "wsgi"
     ],
     "python.formatting.provider": "black"
