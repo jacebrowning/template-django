@@ -2,7 +2,8 @@
 
 This is a [cookiecutter](https://github.com/audreyr/cookiecutter) template for a typical Django project following modern packaging conventions. It utilizes popular libraries alongside Make and Poetry to fully automate all development and deployment tasks. Check out the live demo: [jacebrowning/template-django-demo](https://github.com/jacebrowning/template-django-demo)
 
-[![Build Status](https://img.shields.io/travis/com/jacebrowning/template-django.svg)](https://app.travis-ci.com/github/jacebrowning/template-django)
+[![Build Status](https://img.shields.io/github/actions/workflow/status/jacebrowning/template-django/main.yml?branch=main)](https://github.com/jacebrowning/template-django/actions)
+
 ## Features
 
 * Settings broken out into local, staging, and production
