@@ -168,7 +168,7 @@ test-system: install
 # SERVER TARGETS ##############################################################
 
 .PHONY: run
-run: .envrc install migrate ## Run the applicaiton
+run: .envrc install migrate ## Run the application
 	$(RUN) python manage.py runserver
 
 .PHONY: run-production
